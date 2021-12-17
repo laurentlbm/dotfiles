@@ -56,27 +56,34 @@ z4h install dracula/zsh-syntax-highlighting || return
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
 
+# Configure paths to minimize files at the root of home
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+
+export GOPATH="${XDG_DATA_HOME}/go"
+
+export TERMINFO="${XDG_DATA_HOME}/terminfo"
+export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+
+export npm_config_userconfig="${XDG_CONFIG_HOME}/npm/config"
+export npm_config_cache="${XDG_CACHE_HOME}/npm"
+export npm_config_prefix="${XDG_DATA_HOME}/npm"
+
 # Extend PATH.
-fpath=($fpath "${HOME}/.local/share/zsh/completions")
+fpath=($fpath "${XDG_DATA_HOME}/zsh/completions")
 
 (( $+commands[go] )) && {
-  export GOPATH="${HOME}/.go"
   path=($path "${GOPATH}/bin")
 }
 
 (( $+commands[npm] )) && {
-  npm_prefix=$(npm config get prefix)
-  path=("${npm_prefix}/bin" $path)
+  path=("${npm_config_prefix}/bin" $path)
   export MANPATH="${npm_prefix}/share/man:$MANPATH"
 }
-
-(( $+commands[bat] )) && {
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-  export MANROFFOPT="-c"
-  alias cat='bat'
-}
-
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
 
 z4h init || return
 
@@ -85,9 +92,16 @@ export GPG_TTY=$TTY
 export VISUAL="micro"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
-export LC_CTYPE=en_US.UTF-8 # for docui
-z4h source $HOME/.config/lf/lficons.sh
+export LC_CTYPE=en_US.UTF-8
+z4h source "${XDG_CONFIG_HOME}/lf/lficons.sh"
 
+(( $+commands[bat] )) && {
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c"
+  alias cat='bat'
+}
+
+# Configure fzf preview differently on mpbile
 local columns=$(tmux display-message -p "#{window_width}" || tput cols)
 if [ $columns -lt 80 ]; then
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="down:70%:wrap"
@@ -104,7 +118,8 @@ export FZF_DEFAULT_OPTS="
 --preview-window='$FZF_DEFAULT_PREVIEW_WINDOW_OPTS'
 "
 
-z4h source $HOME/.config/zsh/init.zsh
+# additionnal config using yadm alternates for different systems
+z4h source "${XDG_CONFIG_HOME}/zsh/init.zsh"
 
 # Use additional Git repositories pulled in with `z4h install`.
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
@@ -130,7 +145,9 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 autoload -Uz zmv
 
 # Define functions and completions.
-z4h source $HOME/.config/broot/launcher/bash/br
+z4h source "${XDG_CONFIG_HOME}/broot/launcher/bash/br"
+
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
 
 function md() {
   [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
