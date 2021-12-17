@@ -1,0 +1,54 @@
+# See this wiki page for more info:
+# https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+
+
+print_info() {
+    info "" model
+    info "" distro
+    info "" kernel
+    info "" uptime
+
+    info "" packages
+    info "" shell #""
+
+    info "" cpu
+    info "" memory
+    info "" battery
+}
+
+get_battery() {
+  local level=$(< /sys/class/power_supply/battery/capacity)
+  if [ -z "$level" ]; then
+    battery=''
+    return
+  fi
+  local status=$(< /sys/class/power_supply/battery/status)
+  battery="${level}% ${status}"
+}
+
+# Kernel
+kernel_shorthand="on"
+
+# Distro
+distro_shorthand="tiny"
+os_arch="off"
+
+# Memory
+memory_unit="gib"
+memory_percent="on"
+
+# CPU
+speed_shorthand="on"
+cpu_brand="on"
+
+# Layout
+separator=" "
+
+image_source='
+${c1}      -o          o-
+       +hydNNNNdyh+
+     +mMMMMMMMMMMMMm+
+   `dMM${c2}m:${c1}NMMMMMMN${c2}:m${c1}MMd`
+   hMMMMMMMMMMMMMMMMMMh
+   yyyyyyyyyyyyyyyyyyyy'
+

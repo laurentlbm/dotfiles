@@ -1,0 +1,46 @@
+__select_available() {
+  paru --sync --list --color always \
+    | awk '{print $2" "$1($4 == "" ? "" : " \033[1;33m*")}' \
+    | fzf \
+      --multi \
+      --ansi \
+      --nth 1 \
+      --preview 'paru --sync --info {2}/{1}' \
+      --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
+    | awk '{print $2"/"$1}'
+}
+
+function pin() {
+  local selection=$(__select_available)
+  local args="$@"
+  [[ $# == 0 ]] && args='--sync --refresh'
+
+  if [ -n "$selection" ]; then
+    local packages=("${(@f)$(echo $selection)}")
+    local cmd="paru $args ${packages[@]}"
+    # echo "$cmd"
+    print -s "$cmd"
+    eval "$cmd"
+  fi
+}
+
+__select_installed() {
+  paru --query --quiet \
+    | fzf \
+      --multi \
+      --ansi \
+      --preview 'paru --sync --info {}' \
+      --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS"
+}
+
+function prm() {
+  local selection=$(__select_installed)
+
+  if [ -n "$selection" ]; then
+    local packages=("${(@f)$(echo $selection)}")
+    local cmd="paru --remove --cascade --recursive ${packages[@]}"
+    # echo "$cmd"
+    print -s "$cmd"
+    eval "$cmd"
+  fi
+}

@@ -1,0 +1,180 @@
+# Personal Zsh configuration file. It is strongly recommended to keep all
+# shell customization and configuration (including exported environment
+# variables such as PATH) in this file or in files source by it.
+#
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+
+# Periodic auto-update on Zsh startup: 'ask' or 'no'.
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'ask'
+# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
+zstyle ':z4h:' auto-update-days '28'
+
+# Automaticaly wrap TTY with a transparent tmux ('integrated'), or start a
+# full-fledged tmux ('system'), or disable features that require tmux ('no').
+zstyle ':z4h:' start-tmux       'system'
+# Move prompt to the bottom when zsh starts up so that it's always in the
+# same position. Has no effect if start-tmux is 'no'.
+zstyle ':z4h:' prompt-at-bottom 'yes'
+
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey' keyboard  'pc'
+
+# Right-arrow key accepts one character ('partial-accept') from
+# command autosuggestions or the whole thing ('accept')?
+zstyle ':z4h:autosuggestions' forward-char 'accept'
+
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+#
+# # Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# # ssh when connecting to these hosts.
+# zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
+# zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# # The default value if none of the overrides above match the hostname.
+# zstyle ':z4h:ssh:*'                   enable 'no'
+#
+# # Send these files over to the remote host when connecting over ssh to the
+# # enabled hosts.
+# zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+
+# disable override of ssh
+zstyle ':z4h:ssh:*' ssh-command command ssh
+
+# Clone additional Git repositories from GitHub.
+#
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after `z4h init`.
+z4h install ohmyzsh/ohmyzsh || return
+(( $+commands[docker] )) && z4h install akarzim/zsh-docker-aliases
+z4h install djui/alias-tips || return
+z4h install wfxr/forgit || return
+z4h install dracula/zsh-syntax-highlighting || return
+
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+
+# Extend PATH.
+fpath=($fpath "${HOME}/.local/share/zsh/completions")
+
+(( $+commands[go] )) && {
+  export GOPATH="${HOME}/.go"
+  path=($path "${GOPATH}/bin")
+}
+
+(( $+commands[npm] )) && {
+  npm_prefix=$(npm config get prefix)
+  path=("${npm_prefix}/bin" $path)
+  export MANPATH="${npm_prefix}/share/man:$MANPATH"
+}
+
+(( $+commands[bat] )) && {
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c"
+  alias cat='bat'
+}
+
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
+
+z4h init || return
+
+# Export environment variables.
+export GPG_TTY=$TTY
+export VISUAL="micro"
+export EDITOR="$VISUAL"
+export MICRO_TRUECOLOR=1
+export LC_CTYPE=en_US.UTF-8 # for docui
+z4h source $HOME/.config/lf/lficons.sh
+
+local columns=$(tmux display-message -p "#{window_width}" || tput cols)
+if [ $columns -lt 80 ]; then
+  export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="down:70%:wrap"
+else
+  export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="right:70%:wrap"
+fi
+
+# fzf dracula theme
+export FZF_DEFAULT_OPTS="
+--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9
+--color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9
+--color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6
+--color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4
+--preview-window='$FZF_DEFAULT_PREVIEW_WINDOW_OPTS'
+"
+
+z4h source $HOME/.config/zsh/init.zsh
+
+# Use additional Git repositories pulled in with `z4h install`.
+(( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
+export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES='_ sudo pls'
+z4h source $Z4H/djui/alias-tips/alias-tips.plugin.zsh
+z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
+z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
+z4h source $Z4H/dracula/zsh-syntax-highlighting/zsh-syntax-highlighting.sh
+
+# Define key bindings.
+z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
+z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
+
+z4h bindkey undo Ctrl+/  # undo the last command line change
+z4h bindkey redo Alt+/   # redo the last undone command line change
+
+z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
+z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+
+# Autoload functions.
+autoload -Uz zmv
+
+# Define functions and completions.
+z4h source $HOME/.config/broot/launcher/bash/br
+
+function md() {
+  [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
+}
+compdef _directories md
+
+# cheat.sh
+function cht() {
+  [ $# -gt 0 ] && curl -ks "cht.sh/${*}" && return
+
+  curl -ks 'cht.sh/:list' | fzf --preview 'curl -ks cht.sh/{}' --preview-window "$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | xargs -r -I{} curl -ks 'cht.sh/{}'
+}
+
+# Interactive ripgrep
+rgi() {
+  local INITIAL_QUERY="$1"
+  local RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+
+  FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+        --ansi --disabled --query "$INITIAL_QUERY" \
+        --preview 'result=''{}''; match=(${(@s/:/)result}); file=${match[1]}; line=${match[2]}; (( line < 5 )) && start=0 || start=$(( line - 5 )); end=$(( line + 6 )); bat --wrap character --color always "$file" --highlight-line $line --line-range "${start}:${end}"' --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
+      | xargs -ro micro
+}
+
+
+# Define named directories: ~w <=> Windows home directory on WSL.
+[[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
+
+# Define aliases.
+alias m='micro'
+alias vi='lvim'
+alias ls='exa -a --icons --group-directories-first'
+alias ll='ls -l --git'
+alias tree='ls --tree -I .git'
+alias gac='git add --all && git commit'
+alias x='exit'
+
+(( $+commands[codium] )) && alias code=codium
+
+alias dkst='docker stats --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"'
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+setopt glob_dots     # no special treatment for file names with a leading dot
+setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+neofetch

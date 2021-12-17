@@ -1,0 +1,13 @@
+{
+    "autosu": true,
+    "colorscheme": "dracula",
+    "diffgutter": true,
+    "mkparents": true,
+    "parsecursor": true,
+    "rmtrailingws": true,
+    "savecursor": true,
+    "saveundo": true,
+    "softwrap": true,
+    "tabsize": 2,
+    "tabstospaces": true
+}

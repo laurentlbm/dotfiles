@@ -1,0 +1,63 @@
+[user]
+  name = Laurent le Beau-Martin
+  email = laurent@lebeaumartin.com
+[core]
+  eol = lf
+  autocrlf = input
+  safecrlf = false
+[init]
+  defaultBranch = main
+[commit]
+  # Show diff when preparing commit message
+  verbose = true
+[push]
+  default = simple
+[pull]
+  ff = only
+[fetch]
+  recurseSubmodules = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[rebase]
+  # Automatically stash before a rebase and unstash afterwards.
+  autoStash = true
+[merge]
+  tool = bc
+[mergetool]
+  keepBackup = false
+[diff]
+  tool = bc
+[alias]
+  st = status
+  co = checkout
+  cm = commit
+  l = pull
+  p = push
+  undo = reset HEAD~1 --mixed
+  nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+  sync = "!curbranch=$(git rev-parse --abbrev-ref HEAD); for branch in $(git for-each-ref refs/heads --format='%(refname:short)') ; do if [ $branch = $curbranch ]; then git merge --ff-only origin/${branch}; else git fetch origin ${branch}:${branch}; fi; done;"
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  features = line-numbers decorations
+  syntax-theme = Dracula
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
+[interactive]
+  diffFilter = delta --color-only
+[rerere]
+  enabled = true

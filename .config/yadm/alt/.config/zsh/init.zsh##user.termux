@@ -1,0 +1,33 @@
+# Termux default profile startup scripts (necessary for termux-services)
+z4h source /data/data/com.termux/files/usr/etc/profile
+
+path=("${HOME}/.termux/bin" $path)
+
+# for paging man pages with bat
+(( $+commands[bat] )) && export MANPAGER="mandoc-bat-pager"
+
+# install helper
+pkg() {
+  [ $# -gt 0 ] && command pkg $@ && return
+
+  # preview shows info about the package
+  local preview='command pkg show {} 2> /dev/null | bat --color=always --pager=never --decorations=never --language=yaml'
+
+  command pkg list-all 2> /dev/null | \
+    # remove "Listing..."
+    tail --lines +2 | \
+    # remove repo name and package status
+    sed -r 's#^([^/]+)/.*$#\1#' | \
+    # select packages with fzf
+    fzf --multi --preview "$preview" --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | \
+    # instakl selected
+    xargs --no-run-if-empty pkg install
+}
+
+# call tasker to launch a ssh connection in a new termux session/tab
+ssh-session() {
+  am broadcast --user 0 -a net.dinglish.tasker.TERMUX_SSH -e host $1 > /dev/null
+}
+
+alias spica='ssh-session spica'
+alias vega='ssh-session vega'

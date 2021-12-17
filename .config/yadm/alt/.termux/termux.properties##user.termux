@@ -1,0 +1,28 @@
+# extra-keys = [ \
+ # ['ESC','HOME','END','PGUP', 'PGDN','DEL'] \
+# ]
+extra-keys = [[ \
+  {key: ESC, popup: {macro: "CTRL d", display: "exit"}}, \
+  {key: HOME}, \
+  {key: END}, \
+  {key: PGUP}, \
+  {key: PGDN}, \
+  {key: DEL}, \
+  {key: KEYBOARD} \
+]]
+  #{macro: "ALT j", display: A-j, popup: {macro: "ALT g", display: A-g}}, \
+
+# for tudo (tasker)
+allow-external-apps = true
+
+# Open a new terminal with ctrl + t (volume down + t)
+shortcut.create-session = ctrl + t
+
+# Go one session down with (for example) ctrl + 2
+shortcut.next-session = ctrl + 2
+
+# Go one session up with (for example) ctrl + 1
+shortcut.previous-session = ctrl + 1
+
+terminal-transcript-rows=10000
+terminal-cursor-style=bar

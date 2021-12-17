@@ -1,0 +1,59 @@
+# See this wiki page for more info:
+# https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+print_info() {
+    printf "\n"
+
+    info "" distro
+    info "" kernel
+    info "" uptime
+
+    prin
+
+    info "" packages
+    info "" shell
+    info "" term
+    info "" wm
+
+    prin
+
+    info "" cpu
+    info "﴿" gpu
+    info "" memory
+    # info " " disk
+}
+
+distro_shorthand="tiny"
+os_arch="off"
+
+memory_percent="on"
+
+# cpu
+speed_shorthand="on"
+
+# ignore integrated
+gpu_type="dedicated"
+
+# show number per package manager
+package_managers="on"
+
+# text
+separator=" "
+
+# custom arch logo with arcolinux colours
+ascii_distro="arcolinux_small"
+image_source='
+${c1}           A
+          ooo
+         ooooo
+        `+ooooo
+       Ao:+ooooo
+      oooooooo${c2}ooo${c1}
+     ooooo${c2}oooooooo${c1}
+    oo${c2}ooooooooooooo${c1}
+   o${c2}ooooo     ooo:+^
+  oooooo       oooo;.
+ oooov""       ""voooo
+o``                 ``o'
+
+# Gap between image and text
+gap=5
