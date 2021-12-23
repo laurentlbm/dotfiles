@@ -13,7 +13,7 @@ color-link symbol "#FF79C6"
 color-link symbol.brackets "#F8F8F2"
 color-link symbol.tag "#AE81FF"
 
-color-link type "italic #8BE9FD"
+color-link type "#8BE9FD"
 color-link type.keyword "#FF79C6"
 
 color-link special "#FF79C6"
