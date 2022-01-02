@@ -74,6 +74,7 @@ export npm_config_cache="${XDG_CACHE_HOME}/npm"
 export npm_config_prefix="${XDG_DATA_HOME}/npm"
 
 # Extend PATH.
+path=($path '/opt/cuda/bin')
 fpath=($fpath "${XDG_DATA_HOME}/zsh/completions")
 
 (( $+commands[go] )) && {
