@@ -151,7 +151,7 @@ z4h source "${XDG_CONFIG_HOME}/broot/launcher/bash/br"
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
 
 function md() {
-  [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
+  [[ $# == 1 ]] && mkdir -p -- "$1" && \builtin cd -- "$1"
 }
 compdef _directories md
 
