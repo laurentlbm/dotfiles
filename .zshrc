@@ -94,7 +94,6 @@ export VISUAL="micro"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
 export LC_CTYPE=en_US.UTF-8
-z4h source "${XDG_CONFIG_HOME}/lf/lficons.sh"
 
 (( $+commands[bat] )) && {
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
