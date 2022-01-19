@@ -162,15 +162,26 @@ function cht() {
 }
 
 # Interactive ripgrep
-rgi() {
+rgf() {
   local INITIAL_QUERY="$1"
   local RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 
-  FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+  local selection=$(FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
     fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-        --ansi --disabled --query "$INITIAL_QUERY" \
-        --preview 'result=''{}''; match=(${(@s/:/)result}); file=${match[1]}; line=${match[2]}; (( line < 5 )) && start=0 || start=$(( line - 5 )); end=$(( line + 6 )); bat --wrap character --color always "$file" --highlight-line $line --line-range "${start}:${end}"' --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
-      | xargs -ro micro
+        --ansi \
+        --disabled \
+        --query "$INITIAL_QUERY" \
+        --delimiter ':' \
+        --preview 'line={2}; (( line < 5 )) && start=0 || start=$(( line - 5 )); end=$(( line + 6 )); bat --wrap character --color always {1} --highlight-line {2} --line-range "${start}:${end}"' \
+        --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
+    | cut --delimiter=':' --fields=1,2 --output-delimiter=' +')
+
+  if [ -n "$selection" ]; then
+    local cmd="$EDITOR $selection"
+    # echo "$cmd"
+    print -s "$cmd"
+    eval "$cmd"
+  fi
 }
 
 
