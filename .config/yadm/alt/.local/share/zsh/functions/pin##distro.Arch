@@ -23,24 +23,3 @@ function pin() {
     eval "$cmd"
   fi
 }
-
-__select_installed() {
-  paru --query --quiet \
-    | fzf \
-      --multi \
-      --ansi \
-      --preview 'paru --sync --info {}' \
-      --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS"
-}
-
-function prm() {
-  local selection=$(__select_installed)
-
-  if [ -n "$selection" ]; then
-    local packages=("${(@f)$(echo $selection)}")
-    local cmd="paru --remove --cascade --recursive ${packages[@]}"
-    # echo "$cmd"
-    print -s "$cmd"
-    eval "$cmd"
-  fi
-}

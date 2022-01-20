@@ -1,0 +1,6 @@
+# cheat.sh
+function cht() {
+  [ $# -gt 0 ] && curl -ks "cht.sh/${*}" && return
+
+  curl -ks 'cht.sh/:list' | fzf --preview 'curl -ks cht.sh/{}' --preview-window "$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | xargs -r -I{} curl -ks 'cht.sh/{}'
+}

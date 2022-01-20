@@ -1,11 +1,3 @@
-# Termux default profile startup scripts (necessary for termux-services)
-z4h source /data/data/com.termux/files/usr/etc/profile
-
-path=("${HOME}/.termux/bin" $path)
-
-# for paging man pages with bat
-(( $+commands[bat] )) && export MANPAGER="mandoc-bat-pager"
-
 # install helper
 pkg() {
   [ $# -gt 0 ] && command pkg $@ && return
@@ -23,11 +15,3 @@ pkg() {
     # instakl selected
     xargs --no-run-if-empty pkg install
 }
-
-# call tasker to launch a ssh connection in a new termux session/tab
-ssh-session() {
-  am broadcast --user 0 -a net.dinglish.tasker.TERMUX_SSH -e host $1 > /dev/null
-}
-
-alias spica='ssh-session spica'
-alias vega='ssh-session vega'

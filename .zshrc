@@ -73,9 +73,11 @@ export npm_config_userconfig="${XDG_CONFIG_HOME}/npm/config"
 export npm_config_cache="${XDG_CACHE_HOME}/npm"
 export npm_config_prefix="${XDG_DATA_HOME}/npm"
 
+zsh_functions="${XDG_DATA_HOME}/zsh/functions"
+
 # Extend PATH.
 path=($path '/opt/cuda/bin')
-fpath=($fpath "${XDG_DATA_HOME}/zsh/completions")
+fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
 
 (( $+commands[go] )) && {
   path=($path "${GOPATH}/bin")
@@ -99,6 +101,8 @@ export LC_CTYPE=en_US.UTF-8
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
   alias cat='bat'
+  (( $+commands[mandoc-bat-pager] )) && export MANPAGER="mandoc-bat-pager"
+
 }
 
 # Configure fzf preview differently on mpbile
@@ -117,9 +121,6 @@ export FZF_DEFAULT_OPTS="
 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4
 --preview-window='$FZF_DEFAULT_PREVIEW_WINDOW_OPTS'
 "
-
-# additionnal config using yadm alternates for different systems
-z4h source "${XDG_CONFIG_HOME}/zsh/init.zsh"
 
 # Use additional Git repositories pulled in with `z4h install`.
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
@@ -143,47 +144,10 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 # Autoload functions.
 autoload -Uz zmv
+autoload -Uz $zsh_functions/*(.:t)
 
 # Define functions and completions.
-z4h source "${XDG_CONFIG_HOME}/broot/launcher/bash/br"
-
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
-
-function md() {
-  [[ $# == 1 ]] && mkdir -p -- "$1" && \builtin cd -- "$1"
-}
-compdef _directories md
-
-# cheat.sh
-function cht() {
-  [ $# -gt 0 ] && curl -ks "cht.sh/${*}" && return
-
-  curl -ks 'cht.sh/:list' | fzf --preview 'curl -ks cht.sh/{}' --preview-window "$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | xargs -r -I{} curl -ks 'cht.sh/{}'
-}
-
-# Interactive ripgrep
-rgf() {
-  local INITIAL_QUERY="$1"
-  local RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-
-  local selection=$(FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-        --ansi \
-        --disabled \
-        --query "$INITIAL_QUERY" \
-        --delimiter ':' \
-        --preview 'line={2}; (( line < 5 )) && start=0 || start=$(( line - 5 )); end=$(( line + 6 )); bat --wrap character --color always {1} --highlight-line {2} --line-range "${start}:${end}"' \
-        --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
-    | cut --delimiter=':' --fields=1,2 --output-delimiter=' +')
-
-  if [ -n "$selection" ]; then
-    local cmd="$EDITOR $selection"
-    # echo "$cmd"
-    print -s "$cmd"
-    eval "$cmd"
-  fi
-}
-
 
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
