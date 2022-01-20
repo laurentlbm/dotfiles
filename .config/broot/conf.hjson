@@ -28,14 +28,6 @@
 		}
 
 		{
-		  invocation: preview
-		  key: ctrl-right
-		  apply_to: file
-		  execution: "tmux split-window -h bat {file} --highlight-line {line}"
-		  leave_broot: false
-		}
-
-		{
 			invocation: create {subpath}
 			execution: "tmux new-window $EDITOR {directory}/{subpath}"
 			leave_broot: false
@@ -64,6 +56,8 @@
 			leave_broot: false
 		}
 	]
+
+	# syntax_theme: ""
 
 	skin: {
 		default: "rgb(248, 248, 242) none / rgb(248, 248, 242) none"  // white none / white none
@@ -114,10 +108,10 @@
     help_code: "none rgb(68, 71, 90)"                                    // default light-gray
     help_headers: "rgb(139, 233, 253) none"                                             // cyan default
     help_table_border: "none none"                                                    // default default
-# preview_title: rgb(235, 219, 178) rgb(40, 40, 40) / rgb(189, 174, 147) rgb(40, 40, 40)
-    # preview: rgb(235, 219, 178) rgb(40, 40, 40) / rgb(235, 219, 178) rgb(40, 40, 40)
-    # preview_line_number: rgb(124, 111, 100) None / rgb(124, 111, 100) rgb(40, 40, 40)
-    # preview_match: "rgb(255, 121, 198) none underlined" // pink default underline
+    preview_title: "rgb(40, 42, 54) rgb(189, 147, 249) bold / rgb(248, 248, 242) rgb(98, 114, 164)"  // black purple bold / white blue-purple
+    preview: "rgb(248, 248, 242) rgb(40, 42, 54) / rgb(248, 248, 242) rgb(40, 42, 54)"
+    preview_line_number: "rgb(98, 114, 164) none / rgb(98, 114, 164) none"
+    preview_match: "rgb(255, 121, 198) none underlined" // pink default underline
     # purpose_normal: None None
     # purpose_italic: rgb(177, 98, 134) None Italic
     # purpose_bold: rgb(177, 98, 134) None Bold
@@ -127,7 +121,7 @@
     # hex_ascii_whitespace: rgb(152, 151, 26) None
     # hex_ascii_other: rgb(254, 128, 25) None
     # hex_non_ascii: rgb(214, 93, 14) None
-    # staging_area_title: rgb(235, 219, 178) rgb(40, 40, 40) / rgb(189, 174, 147) rgb(40, 40, 40)
+    staging_area_title: "rgb(40, 42, 54) rgb(189, 147, 249) bold / rgb(248, 248, 242) rgb(98, 114, 164)"  // black purple bold / white blue-purple
     # mode_command_mark: gray(5) ansi(204) Bold
   }
 }
