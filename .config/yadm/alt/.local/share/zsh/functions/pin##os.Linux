@@ -10,7 +10,7 @@ __select_available() {
     | awk '{print $2"/"$1}'
 }
 
-function pin() {
+pin() {
   local selection=$(__select_available)
   local args="$@"
   [[ $# == 0 ]] && args='--sync --refresh'
@@ -23,3 +23,5 @@ function pin() {
     eval "$cmd"
   fi
 }
+
+pin
