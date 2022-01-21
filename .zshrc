@@ -144,7 +144,7 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 # Autoload functions.
 autoload -Uz zmv
-autoload -Uz $zsh_functions/*(.:t)
+autoload -Uz $zsh_functions/*(:t)
 
 # Define functions and completions.
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"

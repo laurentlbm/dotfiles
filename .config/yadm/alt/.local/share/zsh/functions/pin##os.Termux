@@ -1,5 +1,5 @@
 # install helper
-pkg() {
+pin() {
   [ $# -gt 0 ] && command pkg $@ && return
 
   # preview shows info about the package
