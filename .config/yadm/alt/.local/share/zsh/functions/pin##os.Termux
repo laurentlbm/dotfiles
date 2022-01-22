@@ -1,17 +1,21 @@
 # install helper
 pin() {
-  [ $# -gt 0 ] && command pkg $@ && return
-
   # preview shows info about the package
-  local preview='command pkg show {} 2> /dev/null | bat --color=always --pager=never --decorations=never --language=yaml'
+  local preview='pkg show {} 2> /dev/null | bat --color=always --pager=never --decorations=never --language=yaml'
 
-  command pkg list-all 2> /dev/null | \
+  local selection=$(pkg list-all 2> /dev/null | \
     # remove "Listing..."
     tail --lines +2 | \
     # remove repo name and package status
     sed -r 's#^([^/]+)/.*$#\1#' | \
     # select packages with fzf
-    fzf --multi --preview "$preview" --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | \
-    # instakl selected
-    xargs --no-run-if-empty pkg install
+    fzf --multi --preview "$preview" --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS")
+
+  if [ -n "$selection" ]; then
+    local packages=("${(@f)$(echo $selection)}")
+    local cmd="pkg install ${packages[@]}"
+    # echo "$cmd"
+    print -s "$cmd"
+    eval "$cmd"
+  fi
 }
