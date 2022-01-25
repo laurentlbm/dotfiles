@@ -23,6 +23,7 @@
   # Automatically stash before a rebase and unstash afterwards.
   autoStash = true
 [merge]
+  conflictStyle = zdiff3
   tool = bc
 [mergetool]
   keepBackup = false
