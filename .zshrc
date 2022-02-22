@@ -159,6 +159,7 @@ alias ll='ls -l --git'
 alias tree='ls --tree -I .git'
 alias gac='git add --all && git commit'
 alias x='exit'
+alias yt='yt-dlp -f "bestvideo\[ext=mp4\]+bestaudio\[ext=m4a\]/mp4"'
 
 (( $+commands[codium] )) && alias code=codium
 
