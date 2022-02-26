@@ -76,7 +76,6 @@ export npm_config_prefix="${XDG_DATA_HOME}/npm"
 zsh_functions="${XDG_DATA_HOME}/zsh/functions"
 
 # Extend PATH.
-path=($path '/opt/cuda/bin')
 fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
 
 (( $+commands[go] )) && {
@@ -88,6 +87,12 @@ fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
   export MANPATH="${npm_prefix}/share/man:$MANPATH"
 }
 
+if [ -n $TERMUX_VERSION ]; then
+  path=($path '.termux/bin')
+else
+  path=($path '/opt/cuda/bin')
+fi
+
 z4h init || return
 
 # Export environment variables.
@@ -98,11 +103,12 @@ export MICRO_TRUECOLOR=1
 export LC_CTYPE=en_US.UTF-8
 
 (( $+commands[bat] )) && {
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  if [ -n $TERMUX_VERSION ]; then
+    export MANPAGER="mandoc-bat-pager"
+  else
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  fi
   export MANROFFOPT="-c"
-  alias cat='bat'
-  (( $+commands[mandoc-bat-pager] )) && export MANPAGER="mandoc-bat-pager"
-
 }
 
 # Configure fzf preview differently on mpbile
