@@ -1,5 +1,5 @@
 __select_installed() {
-  paru --query --quiet \
+  paru --query --quiet --explicit \
     | fzf \
       --multi \
       --ansi \
@@ -12,7 +12,7 @@ function prm() {
 
   if [ -n "$selection" ]; then
     local packages=("${(@f)$(echo $selection)}")
-    local cmd="paru --remove --cascade --recursive ${packages[@]}"
+    local cmd="paru --remove ${packages[@]}"
     # echo "$cmd"
     print -s "$cmd"
     eval "$cmd"
