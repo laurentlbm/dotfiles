@@ -13,6 +13,7 @@ zstyle ':z4h:' auto-update-days '28'
 # Automaticaly wrap TTY with a transparent tmux ('integrated'), or start a
 # full-fledged tmux ('system'), or disable features that require tmux ('no').
 zstyle ':z4h:' start-tmux       'system'
+
 # Move prompt to the bottom when zsh starts up so that it's always in the
 # same position. Has no effect if start-tmux is 'no'.
 zstyle ':z4h:' prompt-at-bottom 'yes'
@@ -20,23 +21,16 @@ zstyle ':z4h:' prompt-at-bottom 'yes'
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard  'pc'
 
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
+
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char 'accept'
 
 # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
-#
-# # Enable ('yes') or disable ('no') automatic teleportation of z4h over
-# # ssh when connecting to these hosts.
-# zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
-# zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
-# # The default value if none of the overrides above match the hostname.
-# zstyle ':z4h:ssh:*'                   enable 'no'
-#
-# # Send these files over to the remote host when connecting over ssh to the
-# # enabled hosts.
-# zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+zstyle ':z4h:fzf-complete' fzf-bindings tab:repeat
 
 # disable override of ssh
 zstyle ':z4h:ssh:*' ssh-command command ssh
@@ -146,6 +140,8 @@ z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
 z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
 z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+
+z4h bindkey edit-command-line Ctrl+E # edit command line in $EDITOR
 
 # Autoload functions.
 autoload -Uz zmv
