@@ -39,11 +39,8 @@ zstyle ':z4h:ssh:*' ssh-command command ssh
 #
 # This doesn't do anything apart from cloning the repository and keeping it
 # up-to-date. Cloned files can be used after `z4h init`.
-z4h install ohmyzsh/ohmyzsh || return
 (( $+commands[docker] )) && z4h install akarzim/zsh-docker-aliases
-z4h install djui/alias-tips || return
 z4h install wfxr/forgit || return
-z4h install dracula/zsh-syntax-highlighting || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh
@@ -70,22 +67,16 @@ export npm_config_prefix="${XDG_DATA_HOME}/npm"
 zsh_functions="${XDG_DATA_HOME}/zsh/functions"
 
 # Extend PATH.
+path=(
+  "${npm_config_prefix}/bin"
+  $path
+  "${GOPATH}/bin"
+  "${CARGO_HOME}/bin"
+  "/opt/cuda/bin"
+)
+[[ -n $TERMUX_VERSION ]] && path=($path "${HOME}/.termux/bin")
+
 fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
-
-(( $+commands[go] )) && {
-  path=($path "${GOPATH}/bin")
-}
-
-(( $+commands[npm] )) && {
-  path=("${npm_config_prefix}/bin" $path)
-  export MANPATH="${npm_prefix}/share/man:$MANPATH"
-}
-
-if [ -n $TERMUX_VERSION ]; then
-  path=($path '.termux/bin')
-else
-  path=($path '/opt/cuda/bin')
-fi
 
 z4h init || return
 
@@ -123,11 +114,8 @@ export FZF_DEFAULT_OPTS="
 
 # Use additional Git repositories pulled in with `z4h install`.
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
-export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES='_ sudo pls'
-z4h source $Z4H/djui/alias-tips/alias-tips.plugin.zsh
-z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
-z4h source $Z4H/dracula/zsh-syntax-highlighting/zsh-syntax-highlighting.sh
+
 
 # Define key bindings.
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
@@ -159,9 +147,9 @@ alias vi='lvim'
 alias ls='exa -a --icons --group-directories-first'
 alias ll='ls -l --git'
 alias tree='ls --tree -I .git'
-alias gac='git add --all && git commit'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
+alias g=git
 alias lzg=lazygit
 
 (( $+commands[codium] )) && alias code=codium

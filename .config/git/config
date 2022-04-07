@@ -29,12 +29,16 @@
   keepBackup = false
 [diff]
   tool = bc
+  colorMoved = default
 [alias]
   st = status
   co = checkout
-  cm = commit
+  c = commit
+  sw = switch
   l = pull
   p = push
+  aa = add --all
+  ac = "!git add --all && git commit"
   undo = reset HEAD~1 --mixed
   nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
   sync = "!curbranch=$(git rev-parse --abbrev-ref HEAD); for branch in $(git for-each-ref refs/heads --format='%(refname:short)') ; do if [ $branch = $curbranch ]; then git merge --ff-only origin/${branch}; else git fetch origin ${branch}:${branch}; fi; done;"
@@ -43,22 +47,10 @@
   log = delta
   reflog = delta
   show = delta
+[include]
+  path = ~/.config/delta/themes.gitconfig
 [delta]
-  features = line-numbers decorations
+  features = mantis-shrimp-lite # zebra-dark
   syntax-theme = Dracula
-  plus-style = syntax "#003800"
-  minus-style = syntax "#3f0001"
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold yellow ul
-  file-decoration-style = none
-  hunk-header-decoration-style = cyan box ul
-[delta "line-numbers"]
-  line-numbers-left-style = cyan
-  line-numbers-right-style = cyan
-  line-numbers-minus-style = 124
-  line-numbers-plus-style = 28
 [interactive]
   diffFilter = delta --color-only
-[rerere]
-  enabled = true
