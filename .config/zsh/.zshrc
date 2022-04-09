@@ -129,6 +129,7 @@ z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
 z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
+autoload edit-command-line; zle -N edit-command-line
 z4h bindkey edit-command-line Ctrl+E # edit command line in $EDITOR
 
 # Autoload functions.
@@ -147,6 +148,7 @@ alias vi='lvim'
 alias ls='exa -a --icons --group-directories-first'
 alias ll='ls -l --git'
 alias tree='ls --tree -I .git'
+alias mv='mv -i'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g=git
