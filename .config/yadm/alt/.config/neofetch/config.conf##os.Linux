@@ -1,9 +1,15 @@
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+
+distro="$(lsb_release -sd)"
+[[ $distro == Ubuntu* ]] && {
+  distro_icon=""
+}
+
 print_info() {
     printf "\n"
 
-    info "" distro
+    info "${distro_icon:-}" distro
     info "" kernel
     info "" uptime
 
@@ -39,9 +45,10 @@ package_managers="on"
 # text
 separator=" "
 
-# custom arch logo with arcolinux colours
-ascii_distro="arcolinux_small"
-image_source='
+[[ $distro == Arch* ]] && {
+  # custom arch logo0 with arcolinux colours
+  ascii_distro="arcolinux_small"
+  image_source='
 ${c1}           A
           ooo
          ooooo
@@ -54,6 +61,22 @@ ${c1}           A
   oooooo       oooo;.
  oooov""       ""voooo
 o``                 ``o'
+}
+[[ $distro == Ubuntu* ]] && {
+  ascii_distro="ubuntu_small"
+  image_source="
+\${c1}               .-.
+         .-'\`\`(|||)
+      ,\`\\ \\    \`-\`.
+     /   \\ '\`\`-.   \`
+   .-.  ,       \`___:
+  (:::) :        ___
+   \`-\`  \`       ,   :
+     \\   / ,..-\`   ,
+      \`./ /    .-.\`
+         \`-..-(   )
+               \`-\`"
+}
 
 # Gap between image and text
 gap=5

@@ -85,7 +85,8 @@ export GPG_TTY=$TTY
 export VISUAL="micro"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
-export LC_CTYPE=en_US.UTF-8
+export LANG="C.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 (( $+commands[bat] )) && {
   if [ -n $TERMUX_VERSION ]; then
