@@ -1,8 +1,8 @@
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 
-distro="$(lsb_release -sd)"
-[[ $distro == Ubuntu* ]] && {
+lsb_release="$(lsb_release -si)"
+[[ $lsb_release == Ubuntu* ]] && {
   distro_icon=""
 }
 
@@ -28,7 +28,7 @@ print_info() {
     # info " " disk
 }
 
-distro_shorthand="tiny"
+distro_shorthand="off"
 os_arch="off"
 
 memory_percent="on"
@@ -45,7 +45,7 @@ package_managers="on"
 # text
 separator=" "
 
-[[ $distro == Arch* ]] && {
+[[ $lsb_release == Arch* ]] && {
   # custom arch logo0 with arcolinux colours
   ascii_distro="arcolinux_small"
   image_source='
@@ -62,7 +62,7 @@ ${c1}           A
  oooov""       ""voooo
 o``                 ``o'
 }
-[[ $distro == Ubuntu* ]] && {
+[[ $lsb_release == Ubuntu* ]] && {
   ascii_distro="ubuntu_small"
   image_source="
 \${c1}               .-.
