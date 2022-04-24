@@ -40,6 +40,7 @@ zstyle ':z4h:ssh:*' ssh-command command ssh
 # This doesn't do anything apart from cloning the repository and keeping it
 # up-to-date. Cloned files can be used after `z4h init`.
 (( $+commands[docker] )) && z4h install akarzim/zsh-docker-aliases
+z4h install ohmyzsh/ohmyzsh || return
 z4h install wfxr/forgit || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
@@ -115,6 +116,7 @@ export FZF_DEFAULT_OPTS="
 
 # Use additional Git repositories pulled in with `z4h install`.
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
+z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
 
 
