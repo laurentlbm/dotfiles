@@ -1,0 +1,36 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+termux-wake-lock
+
+target="$1"
+log_file="/storage/emulated/0/Backups/logs/backup-${target}-$(date -u +'%Y%m%d-%H%M%S').log"
+
+# for piping progress, see https://stackoverflow.com/questions/59032910/formatting-piped-rsync-output-for-zenity-progress/59051382#59051382
+let i=0
+rsync \
+  -ah \
+  --no-i-r \
+  --delete-after \
+  --info=progress2 \
+  --log-file=$log_file \
+  "/storage/emulated/0/Backups/${target}/" \
+  "spica:/mnt/data/Backups/Phone/${target}" | \
+    stdbuf -i0 -o0 -e0 tr '\r' '\n' | \
+    while IFS= read -r line; do
+      echo "$line"
+      let i++
+      if [ $i -eq 3 ]; then
+        let i=0
+        data=$(echo "$line" | awk '/^ / { print "{ \"transferred\": \""$1"B\", \"percent\": \""int(+$2)"\", \"speed\": \""$3"\", \"timeLeft\": \""$4"\" }" }')
+        am broadcast --user 0 -a net.dinglish.tasker.BACKUP -e data "{ \"event\": \"progress\", \"target\": \"${target}\", \"progress\": ${data} }" > /dev/null
+      fi
+    done
+
+retval=$?
+if [ $retval -ne 0 ]; then
+  am broadcast --user 0 -a net.dinglish.tasker.TASK_ERROR -e data "{ \"task\": \"${target} Backup\", \"logFile\": \"$log_file\" }" > /dev/null
+fi
+
+am broadcast --user 0 -a net.dinglish.tasker.BACKUP -e data "{ \"event\": \"end\", \"target\": \"${target}\" }' > /dev/null
+
+termux-wake-unlock

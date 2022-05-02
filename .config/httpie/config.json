@@ -1,0 +1,11 @@
+{
+  "default_options": [
+    "--ignore-stdin",
+    "--timeout=15",
+    "--style=dracula",
+    "--follow",
+    "--all",
+    "--max-redirects=2",
+    "--format-options=json.indent:2"
+  ]
+}
