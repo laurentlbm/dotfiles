@@ -86,8 +86,6 @@ export GPG_TTY=$TTY
 export VISUAL="micro"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
-export LANG="C.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
 
 (( $+commands[bat] )) && {
   if [ -n $TERMUX_VERSION ]; then
@@ -141,6 +139,8 @@ autoload -Uz $zsh_functions/*(:t)
 
 # Define functions and completions.
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
+
+(( $+commands[thefuck] )) && eval "$(thefuck --alias fu)"
 
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
