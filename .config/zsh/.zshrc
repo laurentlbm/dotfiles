@@ -163,7 +163,7 @@ alias lzg=lazygit
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
-(( $+commands[macchina] )) && {
-  local theme=$(lsb_release -si)
-  macchina -t "${theme}"
+(( $+commands[fastfetch] )) && {
+  local config=$(yadm config local.os || lsb_release -si)
+  fastfetch --load-config "${config}"
 }
