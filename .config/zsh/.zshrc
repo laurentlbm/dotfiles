@@ -58,6 +58,8 @@ export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
 export GOPATH="${XDG_DATA_HOME}/go"
 
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
 export TERMINFO="${XDG_DATA_HOME}/terminfo"
 export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
@@ -88,12 +90,10 @@ export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
 
 (( $+commands[bat] )) && {
-  if [ -n $TERMUX_VERSION ]; then
-    export MANPAGER="mandoc-bat-pager"
-  else
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-  fi
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
+
+  [[ -n $TERMUX_VERSION ]] && export MANPAGER="mandoc-bat-pager"
 }
 
 # Configure fzf preview differently on mpbile
@@ -159,10 +159,11 @@ alias lzg=lazygit
 
 (( $+commands[codium] )) && alias code=codium
 
-alias dkst='docker stats --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"'
-
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
-neofetch
+(( $+commands[macchina] )) && {
+  local theme=$(lsb_release -si)
+  macchina -t "${theme}"
+}
