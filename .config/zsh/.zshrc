@@ -164,6 +164,6 @@ setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
 (( $+commands[fastfetch] )) && {
-  local config=$(yadm config local.os || lsb_release -si)
-  fastfetch --load-config "${config}"
+  local config=$(yadm config local.os)
+  fastfetch --load-config "${config:-$(lsb_release -si)}"
 }
