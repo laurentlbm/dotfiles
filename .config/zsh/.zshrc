@@ -63,15 +63,15 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export TERMINFO="${XDG_DATA_HOME}/terminfo"
 export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
-export npm_config_userconfig="${XDG_CONFIG_HOME}/npm/config"
-export npm_config_cache="${XDG_CACHE_HOME}/npm"
-export npm_config_prefix="${XDG_DATA_HOME}/npm"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/config"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
+export NPM_CONFIG_PREFIX="${XDG_DATA_HOME}/npm"
 
 zsh_functions="${XDG_DATA_HOME}/zsh/functions"
 
 # Extend PATH.
 path=(
-  "${npm_config_prefix}/bin"
+  "${NPM_CONFIG_PREFIX}/bin"
   $path
   "${GOPATH}/bin"
   "${CARGO_HOME}/bin"
@@ -154,8 +154,8 @@ alias tree='ls --tree -I .git'
 alias mv='mv -i'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
-alias g=git
-alias lzg=lazygit
+alias g='git'
+alias lzg='lazygit'
 
 (( $+commands[codium] )) && alias code=codium
 
