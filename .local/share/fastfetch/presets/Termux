@@ -1,4 +1,3 @@
-# for memory to work, we need: mkdir $PREFIX/proc && ln -s /proc/meminfo $PREFIX/proc/meminfo
 --logo android_small
 --host-key 
 --os-key 
