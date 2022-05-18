@@ -10,7 +10,7 @@ __select_available() {
     | awk '{print $2"/"$1}'
 }
 
-pin() {
+pacf() {
   local selection=$(__select_available)
   local args="$@"
   [[ $# == 0 ]] && args='--sync --refresh'
@@ -24,4 +24,4 @@ pin() {
   fi
 }
 
-pin
+pacf
