@@ -114,6 +114,7 @@ export FZF_DEFAULT_OPTS="
 
 # Use additional Git repositories pulled in with `z4h install`.
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
+z4h source $Z4H/ohmyzsh/ohmyzsh/lib/git.zsh
 z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
 
