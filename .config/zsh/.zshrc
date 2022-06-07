@@ -116,6 +116,8 @@ export FZF_DEFAULT_OPTS="
 (( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
 z4h source $Z4H/ohmyzsh/ohmyzsh/lib/git.zsh
 z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
+z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/sudo/sudo.plugin.zsh
+z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/aliases/aliases.plugin.zsh
 z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
 
 
@@ -157,6 +159,9 @@ alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g='git'
 alias lzg='lazygit'
+alias rcp='rsync -avz -h --progress'
+alias rmv='rsync -avz -h --progress --remove-source-files'
+alias sc='sudo systemctl'
 
 (( $+commands[codium] )) && alias code=codium
 
