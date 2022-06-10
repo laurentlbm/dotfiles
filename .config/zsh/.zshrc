@@ -98,7 +98,7 @@ export MICRO_TRUECOLOR=1
 
 # Configure fzf preview differently on mpbile
 local columns=$(tmux display-message -p "#{window_width}" || tput cols)
-if [ $columns -lt 80 ]; then
+if [ $columns -lt 100 ]; then
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="down:70%:wrap"
 else
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="right:70%:wrap"
@@ -151,16 +151,17 @@ autoload -Uz $zsh_functions/*(:t)
 # Define aliases.
 alias m='micro'
 alias vi='lvim'
-alias ls='exa -a --icons --group-directories-first'
-alias ll='ls -l --git'
-alias tree='ls --tree -I .git'
+alias ls='exa --all --icons --group-directories-first'
+alias ll='ls --long --git'
+alias tree='ls --tree --ignore-glob=.git'
 alias mv='mv -i'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g='git'
 alias lzg='lazygit'
-alias rcp='rsync -avz -h --progress'
-alias rmv='rsync -avz -h --progress --remove-source-files'
+# `--no-inc-recursive` checks all the files, so it is a bit slower to start
+alias cpr='rsync --archive --human-readable --partial --info=progress2 --no-inc-recursive --modify-window=1'
+alias mvr='cpr --remove-source-files'
 alias sc='sudo systemctl'
 
 (( $+commands[codium] )) && alias code=codium
