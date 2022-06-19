@@ -87,6 +87,7 @@ z4h init || return
 export GPG_TTY=$TTY
 export VISUAL="micro"
 export EDITOR="$VISUAL"
+export COLORTERM="truecolor"
 export MICRO_TRUECOLOR=1
 
 (( $+commands[bat] )) && {

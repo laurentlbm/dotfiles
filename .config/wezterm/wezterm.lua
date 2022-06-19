@@ -7,6 +7,7 @@ return {
       "Fira Code",
     }),
   font_size = 10.0,
+  line_height = 1.1,
   color_scheme = "Dracula",
   launch_menu = {
     {
@@ -19,83 +20,53 @@ return {
     {
       args = {"ssh", "spica"},
     },
+    {
+      args = {"ssh", "delphi"},
+    },
   },
   keys = {
     {key="l", mods="ALT", action="ShowLauncher"},
+    {key="w", mods="CTRL", action=wezterm.action{CloseCurrentTab={confirm=false}}},
+    {key="/", mods="CTRL", action="DisableDefaultAssignment"},
+    {key="/", mods="CMD", action="DisableDefaultAssignment"},
   },
   window_background_opacity = 0.8,
+  window_padding = {
+    left = "1cell",
+    right = "1cell",
+    top = "0.5cell",
+    bottom = "0.5cell",
+  },
+  hide_tab_bar_if_only_one_tab = true,
+  show_tab_index_in_tab_bar = false,
   use_fancy_tab_bar = false,
+  tab_max_width = 26,
   colors = {
-      tab_bar = {
-        -- The color of the strip that goes along the top of the window
-        -- (does not apply when fancy tab bar is in use)
-        background = "#0b0022",
-
-        -- The active tab is the one that has focus in the window
-        active_tab = {
-          -- The color of the background area for the tab
-          bg_color = "#2b2042",
-          -- The color of the text for the tab
-          fg_color = "#c0c0c0",
-
-          -- Specify whether you want "Half", "Normal" or "Bold" intensity for the
-          -- label shown for this tab.
-          -- The default is "Normal"
-          intensity = "Normal",
-
-          -- Specify whether you want "None", "Single" or "Double" underline for
-          -- label shown for this tab.
-          -- The default is "None"
-          underline = "None",
-
-          -- Specify whether you want the text to be italic (true) or not (false)
-          -- for this tab.  The default is false.
-          italic = false,
-
-          -- Specify whether you want the text to be rendered with strikethrough (true)
-          -- or not for this tab.  The default is false.
-          strikethrough = false,
-        },
-
-        -- Inactive tabs are the tabs that do not have focus
-        inactive_tab = {
-          bg_color = "#1b1032",
-          fg_color = "#808080",
-
-          -- The same options that were listed under the `active_tab` section above
-          -- can also be used for `inactive_tab`.
-        },
-
-        -- You can configure some alternate styling when the mouse pointer
-        -- moves over inactive tabs
-        inactive_tab_hover = {
-          bg_color = "#3b3052",
-          fg_color = "#909090",
-          italic = true,
-
-          -- The same options that were listed under the `active_tab` section above
-          -- can also be used for `inactive_tab_hover`.
-        },
-
-        -- The new tab button that let you create new tabs
-        new_tab = {
-          bg_color = "#1b1032",
-          fg_color = "#808080",
-
-          -- The same options that were listed under the `active_tab` section above
-          -- can also be used for `new_tab`.
-        },
-
-        -- You can configure some alternate styling when the mouse pointer
-        -- moves over the new tab button
-        new_tab_hover = {
-          bg_color = "#3b3052",
-          fg_color = "#909090",
-          italic = true,
-
-          -- The same options that were listed under the `active_tab` section above
-          -- can also be used for `new_tab_hover`.
-        }
-      }
+    tab_bar = {
+      background = "#454158",
+      active_tab = {
+        bg_color = "#9580ff",
+        fg_color = "#22212c",
+      },
+      inactive_tab = {
+        bg_color = "#454158",
+        fg_color = "#f2f2f8",
+      },
+      inactive_tab_hover = {
+        bg_color = "#7970a9",
+        fg_color = "#f2f2f8",
+        intensity = "Bold",
+        italic = true,
+      },
+      new_tab = {
+        bg_color = "#454158",
+        fg_color = "#f2f2f8",
+      },
+      new_tab_hover = {
+        bg_color = "#ffca80",
+        fg_color = "#22212c",
+        intensity = "Bold",
+      },
     },
+  },
 }
