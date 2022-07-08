@@ -97,7 +97,7 @@ export MICRO_TRUECOLOR=1
   [[ -n $TERMUX_VERSION ]] && export MANPAGER="mandoc-bat-pager"
 }
 
-# Configure fzf preview differently on mpbile
+# Configure fzf preview differently on mobile
 local columns=$(tmux display-message -p "#{window_width}" || tput cols)
 if [ $columns -lt 100 ]; then
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="down:70%:wrap"
@@ -114,25 +114,17 @@ export FZF_DEFAULT_OPTS="
 "
 
 # Use additional Git repositories pulled in with `z4h install`.
-(( $+commands[docker] )) && z4h source $Z4H/akarzim/zsh-docker-aliases/alias.zsh
-z4h source $Z4H/ohmyzsh/ohmyzsh/lib/git.zsh
-z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
-z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/sudo/sudo.plugin.zsh
-z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/aliases/aliases.plugin.zsh
-z4h source $Z4H/wfxr/forgit/forgit.plugin.zsh
+(( $+commands[docker] )) && z4h source --compile $Z4H/akarzim/zsh-docker-aliases/alias.zsh
+z4h source --compile $Z4H/ohmyzsh/ohmyzsh/lib/git.zsh
+z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
+z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/sudo/sudo.plugin.zsh
+z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/aliases/aliases.plugin.zsh
+z4h source --compile $Z4H/wfxr/forgit/forgit.plugin.zsh
 
 
 # Define key bindings.
-z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
-z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
-
-z4h bindkey undo Ctrl+/  # undo the last command line change
-z4h bindkey redo Alt+/   # redo the last undone command line change
-
-z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
-z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
-z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
-z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+z4h bindkey undo Ctrl+Z  # undo the last command line change
+z4h bindkey redo Ctrl+Y  # redo the last undone command line change
 
 autoload edit-command-line; zle -N edit-command-line
 z4h bindkey edit-command-line Ctrl+E # edit command line in $EDITOR
@@ -151,10 +143,7 @@ autoload -Uz $zsh_functions/*(:t)
 
 # Define aliases.
 alias m='micro'
-alias vi='lvim'
-alias ls='exa --all --icons --group-directories-first'
-alias ll='ls --long --git'
-alias tree='ls --tree --ignore-glob=.git'
+alias vi='nvim'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -166,6 +155,13 @@ alias lzg='lazygit'
 alias cpr='rsync --archive --human-readable --partial --info=progress2 --no-inc-recursive --modify-window=1'
 alias mvr='cpr --remove-source-files'
 alias sc='sudo systemctl'
+
+(( $+commands[exa] )) && {
+  export TIME_STYLE='long-iso'
+  alias ls='exa --all --git --icons --group-directories-first --color-scale --classify'
+  alias ll='ls --long'
+  alias tree='ls --tree --ignore-glob=.git'
+}
 
 (( $+commands[codium] )) && alias code=codium
 
