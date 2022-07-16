@@ -171,6 +171,7 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
 (( $+commands[fastfetch] )) && {
   local config=$(yadm config local.os)
-  fastfetch --load-config "${config:-$(lsb_release -si)}"
+  config="${config:-$(lsb_release -si)}"
+  fastfetch --load-config "${config}"
   echo ''
 }
