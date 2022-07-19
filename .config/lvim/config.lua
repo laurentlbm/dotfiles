@@ -2,9 +2,11 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "catppuccin"
 
 vim.g.tokyonight_style = "night"
+vim.g.catppuccin_flavour = "mocha"
+
 vim.opt.relativenumber = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -75,7 +77,9 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-
+  {
+    "catppuccin/nvim"
+  }
 }
 
 lvim.builtin.which_key.mappings["t"] = {

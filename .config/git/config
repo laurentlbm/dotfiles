@@ -51,6 +51,6 @@
   path = ~/.config/delta/themes.gitconfig
 [delta]
   features = mantis-shrimp-lite # zebra-dark
-  syntax-theme = Dracula
+  syntax-theme = Catppuccin
 [interactive]
   diffFilter = delta --color-only
