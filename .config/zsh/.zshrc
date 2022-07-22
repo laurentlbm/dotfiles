@@ -48,15 +48,15 @@ z4h install wfxr/forgit || return
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
 
-zsh_functions="${XDG_DATA_HOME}/zsh/functions"
-fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
-
 [[ -n $TERMUX_VERSION ]] && {
   # import environment variables (done by systemd on Linux)
-  z4h source .config/environment.d/*.conf
+  z4h source ${HOME}/.config/environment.d/*.conf
 
   path=($path "${HOME}/.termux/bin")
 }
+
+zsh_functions="${XDG_DATA_HOME}/zsh/functions"
+fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
 
 z4h init || return
 
