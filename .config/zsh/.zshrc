@@ -48,38 +48,15 @@ z4h install wfxr/forgit || return
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
 
-# Configure paths to minimize files at the root of home
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_CACHE_HOME="${HOME}/.cache"
-
-export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
-export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-
-export GOPATH="${XDG_DATA_HOME}/go"
-
-export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
-
-export TERMINFO="${XDG_DATA_HOME}/terminfo"
-export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
-
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/config"
-export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
-export NPM_CONFIG_PREFIX="${XDG_DATA_HOME}/npm"
-
 zsh_functions="${XDG_DATA_HOME}/zsh/functions"
-
-# Extend PATH.
-path=(
-  "${NPM_CONFIG_PREFIX}/bin"
-  $path
-  "${GOPATH}/bin"
-  "${CARGO_HOME}/bin"
-  "/opt/cuda/bin"
-)
-[[ -n $TERMUX_VERSION ]] && path=($path "${HOME}/.termux/bin")
-
 fpath=("${zsh_functions}" $fpath "${XDG_DATA_HOME}/zsh/completions")
+
+[[ -n $TERMUX_VERSION ]] && {
+  # import environment variables (done by systemd on Linux)
+  z4h source .config/environment.d/*.conf
+
+  path=($path "${HOME}/.termux/bin")
+}
 
 z4h init || return
 
