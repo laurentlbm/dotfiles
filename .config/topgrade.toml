@@ -11,7 +11,8 @@ run_in_tmux = false
 max_concurrency = 5
 # Additional git repositories to pull
 repos = [
-    "~/projects/*/"
+    "~/projects/*/",
+    "~/.local/share/catppuccin/*/"
 ]
 # Arguments to pass Git when pulling Repositories
 arguments = "--recurse-submodules"

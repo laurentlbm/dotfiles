@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm';
+local catppuccin = require("colors/catppuccin").setup { sync = false }
 
 return {
   font = wezterm.font_with_fallback({
@@ -6,9 +7,10 @@ return {
       "JetBrainsMono Nerd Font Mono",
       "Fira Code",
     }),
-  font_size = 10.0,
-  line_height = 1.1,
-  color_scheme = "Dracula",
+  font_size = 11.0,
+  line_height = 1.2,
+  default_cursor_style = "BlinkingBar",
+  colors = catppuccin,
   launch_menu = {
     {
       args = {"btop"},
@@ -19,6 +21,9 @@ return {
     },
     {
       args = {"ssh", "spica"},
+    },
+    {
+      args = {"ssh", "vega"},
     },
     {
       args = {"ssh", "delphi"},
@@ -39,34 +44,6 @@ return {
   },
   hide_tab_bar_if_only_one_tab = true,
   show_tab_index_in_tab_bar = false,
-  use_fancy_tab_bar = false,
-  tab_max_width = 26,
-  colors = {
-    tab_bar = {
-      background = "#454158",
-      active_tab = {
-        bg_color = "#9580ff",
-        fg_color = "#22212c",
-      },
-      inactive_tab = {
-        bg_color = "#454158",
-        fg_color = "#f2f2f8",
-      },
-      inactive_tab_hover = {
-        bg_color = "#7970a9",
-        fg_color = "#f2f2f8",
-        intensity = "Bold",
-        italic = true,
-      },
-      new_tab = {
-        bg_color = "#454158",
-        fg_color = "#f2f2f8",
-      },
-      new_tab_hover = {
-        bg_color = "#ffca80",
-        fg_color = "#22212c",
-        intensity = "Bold",
-      },
-    },
-  },
+--  use_fancy_tab_bar = false,
+--  tab_max_width = 26,
 }

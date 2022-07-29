@@ -133,6 +133,7 @@ alias lzg='lazygit'
 alias cpr='rsync --archive --human-readable --partial --info=progress2 --no-inc-recursive --modify-window=1'
 alias mvr='cpr --remove-source-files'
 alias sc='sudo systemctl'
+alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
 
 (( $+commands[exa] )) && {
   export TIME_STYLE='long-iso'
