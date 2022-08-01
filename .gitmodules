@@ -10,9 +10,6 @@
 [submodule ".local/share/catppuccin/Kvantum"]
 	path = .local/share/catppuccin/Kvantum
 	url = git@github.com:catppuccin/kvantum.git
-[submodule ".local/share/catppuccin/cursors"]
-	path = .local/share/catppuccin/cursors
-	url = git@github.com:catppuccin/cursors.git
 [submodule ".local/share/catppuccin/Kde"]
 	path = .local/share/catppuccin/Kde
 	url = git@github.com:catppuccin/kde.git
