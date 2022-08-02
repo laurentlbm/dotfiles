@@ -20,8 +20,10 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
 
 # Configure paths
 [[ -n $TERMUX_VERSION ]] && {
-  # import environment variables (done by systemd on Linux)
+  # export environment variables (done by systemd on Linux)
+  set -o allexport # export all variables created next
   z4h source ${HOME}/.config/environment.d/*.conf
+  set +o allexport
 
   path=($path "${HOME}/.termux/bin")
 }
