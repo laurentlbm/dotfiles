@@ -7,8 +7,8 @@ return {
       "JetBrainsMono Nerd Font Mono",
       "Fira Code",
     }),
-  font_size = 11.0,
-  line_height = 1.2,
+  font_size = 10.0,
+  line_height = 1.25,
   default_cursor_style = "BlinkingBar",
   colors = catppuccin,
   launch_menu = {
