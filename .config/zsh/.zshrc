@@ -19,7 +19,7 @@ zstyle ':z4h:ssh:*'            ssh-command           command ssh
 z4h install ohmyzsh/ohmyzsh wfxr/forgit
 
 # Configure paths
-[[ -n $TERMUX_VERSION ]] && {
+[[ ! -z ENVIRONMENTD_LOADED ]] && {
   # export environment variables (done by systemd on Linux)
   set -o allexport # export all variables created next
   z4h source ${HOME}/.config/environment.d/*.conf
