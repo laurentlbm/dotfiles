@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+args="$@"
+[[ $# == 0 ]] && args='.'
+
+find "$args" -type d -empty -delete -print
