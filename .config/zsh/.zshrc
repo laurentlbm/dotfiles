@@ -92,9 +92,16 @@ z4h bindkey edit-command-line Ctrl+E
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
 
 # Configure tools
-(( $+commands[atuin] )) && source <(atuin init zsh)
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd cd)"
-(( $+commands[thefuck] )) && eval "$(thefuck --alias fu)"
+(( $+commands[atuin] )) && {
+  export ATUIN_NOBIND="true"
+  source <(atuin init zsh)
+  z4h bindkey _atuin_search_widget Ctrl+R
+}
+
+(( $+commands[zoxide] )) && source <(zoxide init zsh --cmd cd)
+
+(( $+commands[thefuck] )) && source <(thefuck --alias fu)
+
 (( $+commands[exa] )) && {
   alias ls='exa --all --git --icons --group-directories-first --time-style=long-iso --color-scale --classify'
   alias ll='ls --long'
