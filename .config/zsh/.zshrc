@@ -24,9 +24,9 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
   set -o allexport # export all variables created next
   z4h source ${HOME}/.config/environment.d/*.conf
   set +o allexport
-
-  path=($path "${HOME}/.termux/bin")
 }
+
+[[ -n $TERMUX_VERSION ]] && path=($path "${HOME}/.termux/bin")
 
 # Initialize zsh4humans
 z4h init || return
@@ -109,6 +109,7 @@ z4h bindkey edit-command-line Ctrl+E
 }
 
 # Define aliases.
+alias sudo='sudo ' # https://wiki.archlinux.org/title/Sudo#Passing_aliases
 alias m='micro'
 (( $+commands[nvim] )) && alias vi='nvim'
 (( $+commands[lvim] )) && alias vi='lvim'
