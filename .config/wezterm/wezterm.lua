@@ -1,5 +1,4 @@
 local wezterm = require 'wezterm';
-local catppuccin = require("colors/catppuccin").setup { sync = false }
 
 return {
   font = wezterm.font_with_fallback({
@@ -10,7 +9,7 @@ return {
   font_size = 10.0,
   line_height = 1.25,
   default_cursor_style = "BlinkingBar",
-  colors = catppuccin,
+  color_scheme = "Catppuccin Mocha",
   launch_menu = {
     {
       args = {"btop"},

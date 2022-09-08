@@ -1,6 +1,3 @@
-[submodule ".local/share/catppuccin/wezterm"]
-	path = .local/share/catppuccin/wezterm
-	url = git@github.com:catppuccin/wezterm.git
 [submodule ".local/share/catppuccin/micro"]
 	path = .local/share/catppuccin/micro
 	url = git@github.com:catppuccin/micro.git
