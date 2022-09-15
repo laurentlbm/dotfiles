@@ -11,12 +11,12 @@ zstyle ':z4h:'                term-shell-integration yes
 zstyle ':z4h:autosuggestions' forward-char           accept
 zstyle ':z4h:fzf-complete'    recurse-dirs           yes
 zstyle ':z4h:fzf-complete'    fzf-bindings           tab:repeat
-zstyle ':z4h:ssh:*'            enable                no
-zstyle ':z4h:ssh:*'            ssh-command           command ssh
+zstyle ':z4h:ssh:*'           enable                 no
+zstyle ':z4h:ssh:*'           ssh-command            command ssh
 
 # Clone additional Git repositories from GitHub.
 (( $+commands[docker] )) && z4h install akarzim/zsh-docker-aliases
-z4h install ohmyzsh/ohmyzsh wfxr/forgit
+z4h install ohmyzsh/ohmyzsh wfxr/forgit pkasemir/find-the-command
 
 # Configure paths
 [[ ! -z ENVIRONMENTD_LOADED ]] && {
@@ -74,6 +74,7 @@ z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/sudo/sudo.plugin.zsh
 z4h source --compile $Z4H/ohmyzsh/ohmyzsh/plugins/aliases/aliases.plugin.zsh
 z4h source --compile $Z4H/wfxr/forgit/forgit.plugin.zsh
+z4h source --compile $Z4H/pkasemir/find-the-command/usr/share/doc/find-the-command/ftc.zsh
 
 # Define key bindings.
 z4h bindkey undo Ctrl+Z  # undo the last command line change
