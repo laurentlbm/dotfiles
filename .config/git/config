@@ -50,7 +50,7 @@
 [include]
   path = ~/.config/delta/themes.gitconfig
 [delta]
-  features = mantis-shrimp-lite # zebra-dark
+  features = chameleon
   syntax-theme = Catppuccin-mocha
 [interactive]
   diffFilter = delta --color-only
