@@ -5,7 +5,7 @@
 zstyle ':z4h:'                auto-update            ask
 zstyle ':z4h:'                auto-update-days       28
 zstyle ':z4h:'                start-tmux             system
-zstyle ':z4h:'                prompt-at-bottom       yes
+#zstyle ':z4h:'                prompt-at-bottom       yes
 zstyle ':z4h:bindkey'         keyboard               pc
 zstyle ':z4h:'                term-shell-integration yes
 zstyle ':z4h:autosuggestions' forward-char           accept
@@ -132,9 +132,6 @@ alias ypull='yadm pull; yadm submodule update --init --recursive --force --remot
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
-(( $+commands[fastfetch] )) && {
-  local config=$(yadm config local.os)
-  config="${config:-$(lsb_release -si)}"
-  fastfetch --load-config "${config}"
-  echo ''
+(( $+commands[macchina] )) && {
+  macchina --config "${XDG_CONFIG_HOME}/macchina/$(hostname).toml"
 }

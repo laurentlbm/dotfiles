@@ -1,5 +1,0 @@
---logo android_small
---host-key 
---os-key 
---os-format "{2} {8}"
---battery-dir /sys/class/power_supply/battery

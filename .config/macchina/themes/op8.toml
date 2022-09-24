@@ -1,0 +1,51 @@
+prefer_small_ascii = true
+
+spacing = 1
+padding = 1
+hide_ascii = false
+separator = ""
+key_color = "Green"
+separator_color = "Cyan"
+
+[palette]
+visible = false
+
+[bar]
+visible = false
+
+[box]
+visible = true
+border = "rounded"
+title = "─  OnePlus 8 "
+
+[box.inner_margin]
+x = 1
+y = 0
+
+[randomize]
+key_color = false
+separator_color = false
+
+[custom_ascii]
+color = "Green"
+path = "~/.config/macchina/themes/android_ascii"
+
+[keys]
+host = "Host"
+kernel = ""
+battery = ""
+os = ""
+de = "DE"
+wm = "WM"
+distro = "Distro"
+terminal = "Terminal"
+shell = "Shell"
+packages = "Packages"
+uptime = ""
+memory = ""
+machine = "Machine"
+local_ip = "ﯱ"
+backlight = "Brightness"
+resolution = "Resolution"
+cpu_load = ""
+cpu = "CPU"
