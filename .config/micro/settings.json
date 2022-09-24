@@ -4,6 +4,7 @@
     "diffgutter": true,
     "fastdirty": true,
     "ignorecase": false,
+    "indentchar": "⇥",
     "mkparents": true,
     "parsecursor": true,
     "pluginchannels": [

@@ -1,0 +1,26 @@
+theme = "op8"
+interface = "wlan0"
+long_uptime = true
+
+# Displays only the specified readouts.
+# Accepted values (case-sensitive):
+#   - Host
+#   - Machine
+#   - Kernel
+#   - Distribution
+#   - OperatingSystem
+#   - DesktopEnvironment
+#   - WindowManager
+#   - Resolution
+#   - Backlight
+#   - Packages
+#   - LocalIP
+#   - Terminal
+#   - Shell
+#   - Uptime
+#   - Processor
+#   - ProcessorLoad
+#   - Memory
+#   - Battery
+# Example:
+show = ["Kernel", "LocalIP", "Uptime", "ProcessorLoad", "Memory", "Battery"]
