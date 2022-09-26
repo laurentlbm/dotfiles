@@ -7,7 +7,7 @@ return {
       "Fira Code",
     }),
   font_size = 10.0,
-  line_height = 1.25,
+  line_height = 1.15,
   default_cursor_style = "BlinkingBar",
   color_scheme = "Catppuccin Mocha",
   launch_menu = {
