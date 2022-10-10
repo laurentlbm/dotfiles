@@ -1,0 +1,50 @@
+spacing = 1
+padding = 1
+hide_ascii = false
+separator = ""
+key_color = "#f9c096"
+
+[palette]
+visible = false
+
+[bar]
+visible = true
+glyph = "●"
+hide_delimiters = true
+
+[box]
+visible = true
+border = "rounded"
+title = "─  Delphi "
+
+[box.inner_margin]
+x = 1
+y = 0
+
+[randomize]
+key_color = false
+separator_color = false
+
+[custom_ascii]
+color = "#f9c096"
+path = "~/.config/macchina/themes/delphi_ascii"
+
+[keys]
+host = "Host"
+kernel = ""
+battery = "Battery"
+os = "OS"
+de = "DE"
+wm = "WM"
+distro = ""
+terminal = "Terminal"
+shell = "Shell"
+packages = "Packages"
+uptime = ""
+memory = ""
+machine = "Machine"
+local_ip = "ﯱ"
+backlight = "Brightness"
+resolution = "Resolution"
+cpu_load = ""
+cpu = "CPU"
