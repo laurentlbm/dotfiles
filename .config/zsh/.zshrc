@@ -29,10 +29,6 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
 
 [[ -n $TERMUX_VERSION ]] && path=($path "${HOME}/.termux/bin")
 
-(( $+commands[carapace] )) && {
-  zstyle ':z4h:zsh-completions' channel none
-}
-
 # Initialize zsh4humans
 z4h init || return
 
@@ -97,9 +93,6 @@ z4h bindkey edit-command-line Ctrl+E
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
 
-# auto-completions
-(( $+commands[carapace] )) && source <(carapace _carapace)
-
 # Configure tools
 (( $+commands[atuin] )) && {
   export ATUIN_NOBIND="true"
@@ -108,6 +101,8 @@ z4h bindkey edit-command-line Ctrl+E
 }
 
 (( $+commands[zoxide] )) && source <(zoxide init zsh --cmd cd)
+
+(( $+commands[thefuck] )) && source <(thefuck --alias fu)
 
 (( $+commands[exa] )) && {
   alias ls='exa --all --git --icons --group-directories-first --time-style=long-iso --color-scale --classify'
