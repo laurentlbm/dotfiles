@@ -20,7 +20,7 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
 (( $+commands[pacman] )) && z4h install pkasemir/find-the-command
 
 # Configure paths
-[[ ! -z ENVIRONMENTD_LOADED ]] && {
+[[ ! -z $ENVIRONMENTD_LOADED ]] && {
   # export environment variables (done by systemd on Linux)
   set -o allexport # export all variables created next
   z4h source ${HOME}/.config/environment.d/*.conf
@@ -28,6 +28,8 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
 }
 
 [[ -n $TERMUX_VERSION ]] && path=($path "${HOME}/.termux/bin")
+
+(( $+commands[ruby] && $+commands[gem] )) && path=("$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" $path)
 
 # Initialize zsh4humans
 z4h init || return
