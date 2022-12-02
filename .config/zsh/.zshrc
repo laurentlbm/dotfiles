@@ -20,7 +20,7 @@ z4h install ohmyzsh/ohmyzsh wfxr/forgit
 (( $+commands[pacman] )) && z4h install pkasemir/find-the-command
 
 # Configure paths
-[[ ! -z $ENVIRONMENTD_LOADED ]] && {
+[[ -z "$ENVIRONMENTD_LOADED" ]] && {
   # export environment variables (done by systemd on Linux)
   set -o allexport # export all variables created next
   z4h source ${HOME}/.config/environment.d/*.conf
