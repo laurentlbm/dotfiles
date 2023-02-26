@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+function pkgf() {
+  # preview shows info about the package
+  preview='pkg show {1} 2> /dev/null | bat --color=always --pager=never --decorations=never --language=yaml'
+
+  selection=$(pkg list-all 2> /dev/null | \
+    # remove "Listing..."
+    tail --lines +2 | \
+    # split package name and repo name
+    sed 's#/# #' | \
+    # mark installed packages
+    sed 's/\[installed.*$/\x1b[33m*\x1b[m/' | \
+    # select packages with fzf
+    fzf \
+      --ansi \
+      --multi \
+      --nth 1 \
+      --with-nth 1,5 \
+      --preview "$preview" \
+      --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" | \
+    awk '{print $1}' | \
+    # join lines
+    tr '\n' ' '
+    )
+
+  if [ -n "$selection" ]; then
+    cmd="pkg install ${selection}"
+     # echo "$cmd"
+    print -s "$cmd"
+    eval "$cmd"
+  fi
+}
+
+pkgf
