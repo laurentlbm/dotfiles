@@ -24,6 +24,7 @@ then
   # Theme (load early because some plugins use colors set by the theme)
   zgenom load $ZDOTDIR/catppuccin
 
+  # Shell config I didn't know where else to put
   zgenom load $ZDOTDIR/defaults.zsh
 
   # Zephyr plugins
@@ -32,8 +33,6 @@ then
 
   # Ohmyzsh plugins
   zgenom ohmyzsh
-  zgenom ohmyzsh plugins/docker
-  zgenom ohmyzsh plugins/docker-compose
   zgenom ohmyzsh plugins/git
   zgenom ohmyzsh plugins/sudo
 
@@ -58,6 +57,7 @@ then
   zgenom eval --name starship <<(starship init zsh)
 
   # Aliases
+  zgenom load akarzim/zsh-docker-aliases
   zgenom load $ZDOTDIR/aliases
 
   # Key bindings
