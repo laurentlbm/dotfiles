@@ -1,7 +1,3 @@
-export EDITOR=micro
-export VISUAL=micro
-export LESS='-g -i -M -R -S -w -z-4'
-
 # Glob options.
 setopt EXTENDED_GLOB         # Use more awesome globbing features.
 setopt GLOB_DOTS             # Include dotfiles when globbing.
@@ -13,6 +9,7 @@ setopt INTERACTIVE_COMMENTS  # Enable comments in interactive shell.
 setopt RC_QUOTES             # Allow 'Hitchhikers''s Guide' instead of 'Hitchhikers'\''s Guide'.
 setopt NO_MAIL_WARNING       # Don't print a warning message if a mail file has been accessed.
 setopt NO_BEEP               # Don't Beep on error in line editor.
+setopt NO_AUTO_REMOVE_SLASH  # Don't remove trailing slash
 
 # Job options.
 setopt LONG_LIST_JOBS        # List jobs in the long format by default.
@@ -27,3 +24,18 @@ autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
+
+# Default editor
+export EDITOR=micro
+export VISUAL=micro
+
+# This affects every invocation of `less`.
+#
+#   -i   case-insensitive search unless search string contains uppercase letters
+#   -R   color
+#   -F   exit if there is less than one page of content
+#   -X   keep content on screen after exit
+#   -M   show more info at the bottom prompt line
+#   -x4  tabs are 4 instead of 8
+export LESS='-iRFXMx4'
+export PAGER=less

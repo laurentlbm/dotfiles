@@ -22,7 +22,7 @@ then
   zgenom load jandamm/zgenom-ext-eval
 
   # Shell config I didn't know where else to put...
-  zgenom load $ZDOTDIR/defaults.zsh
+  zgenom load $ZDOTDIR/stuff.zsh
 
   # Configure built-in history management.
   zgenom load mattmc3/zephyr plugins/history
@@ -31,6 +31,7 @@ then
   zgenom ohmyzsh
   zgenom ohmyzsh plugins/git  # git aliases
   zgenom ohmyzsh plugins/sudo # prefix command with sudo with <ESC><ESC>
+
   # Configure built-in completion system.
   zgenom load z-shell/zsh-fancy-completions
 
