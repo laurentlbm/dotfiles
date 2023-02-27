@@ -12,7 +12,7 @@ fi
 source $ZGEN_SOURCE/zgenom.zsh
 
 # Update zgenom and plugins every 7 days
-zgenom autoupdate
+zgenom autoupdate --background
 
 if ! zgenom saved
 then
@@ -21,44 +21,55 @@ then
   # zgenom extension
   zgenom load jandamm/zgenom-ext-eval
 
-  # Theme (load early because some plugins use colors set by the theme)
-  zgenom load $ZDOTDIR/catppuccin
-
-  # Shell config I didn't know where else to put
+  # Shell config I didn't know where else to put...
   zgenom load $ZDOTDIR/defaults.zsh
 
-  # Zephyr plugins
+  # Configure built-in history management.
   zgenom load mattmc3/zephyr plugins/history
-  zgenom load mattmc3/zephyr plugins/utility
 
-  # Ohmyzsh plugins
+  # Load ohmyzsh plugins
   zgenom ohmyzsh
-  zgenom ohmyzsh plugins/git
-  zgenom ohmyzsh plugins/sudo
+  zgenom ohmyzsh plugins/git  # git aliases
+  zgenom ohmyzsh plugins/sudo # prefix command with sudo with <ESC><ESC>
+  # Configure built-in completion system.
+  zgenom load z-shell/zsh-fancy-completions
 
-  # Completions
-  zgenom load zap-zsh/completions
+  # Add tons of completion definitions.
   zgenom load clarketm/zsh-completions
 
-  # Prompt helpers
-  zgenom load zsh-users/zsh-syntax-highlighting
-  zgenom load zsh-users/zsh-autosuggestions
-  zgenom load hlissner/zsh-autopair
+  # Use fzf for tab completions.
   zgenom load Aloxaf/fzf-tab
+  zgenom eval <<EOF
+    zstyle ':fzf-tab:*' show-group none
+EOF
+
+  # Syntax highlighting
+  zgenom load zsh-users/zsh-syntax-highlighting
+
+  # Fish-like fast/unobtrusive autosuggestions for zsh.
+  zgenom load zsh-users/zsh-autosuggestions
+
+  # Auto-close and delete matching delimiters.
+  zgenom load hlissner/zsh-autopair
+
+  # Suggestions when command not found.
   zgenom load Freed-Wu/zsh-command-not-found
 
-  # Jump to directories more quickly
+  # Jump to directories more quickly.
   zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
 
-  # Better search for shell history
+  # Better search for shell history.
   zgenom eval --name atuin <<(atuin init zsh)
 
-  # Prompt theme
-  zgenom eval --name starship <<(starship init zsh)
-
-  # Aliases
+  # Docker aliases
   zgenom load akarzim/zsh-docker-aliases
+
+  # Custom aliases
   zgenom load $ZDOTDIR/aliases
+
+  # Prompt theme
+  zgenom load $ZDOTDIR/theme
+  zgenom eval --name starship <<(starship init zsh)
 
   # Key bindings
   zgenom load $ZDOTDIR/bindings.zsh
