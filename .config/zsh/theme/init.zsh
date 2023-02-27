@@ -2,6 +2,9 @@
 0="${${(M)0:#/*}:-$PWD/$0}"
 THEME_DIR="${0:A:h}"
 
+source "$THEME_DIR/zsh-syntax-highlighting.zsh"
+source "$THEME_DIR/ls-colors.zsh"
+
 # For micro
 export COLORTERM="truecolor"
 export MICRO_TRUECOLOR=1
@@ -23,5 +26,5 @@ export FZF_DEFAULT_OPTS="
 --preview-window='$FZF_DEFAULT_PREVIEW_WINDOW_OPTS'
 "
 
-source "$THEME_DIR/zsh-syntax-highlighting.zsh"
-source "$THEME_DIR/ls-colors.zsh"
+# Apply theme to file list in completions
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

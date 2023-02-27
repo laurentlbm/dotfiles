@@ -23,6 +23,3 @@ arguments = "--recurse-submodules"
 # Custom commands
 [commands]
 #"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
-
-[linux]
-arch_package_manager = "pikaur"
