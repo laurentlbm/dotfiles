@@ -25,24 +25,24 @@ symbol = ' '
 
 # Prompt symbols
 [character]
-success_symbol = "[](#a6e3a1 bold)"
-error_symbol = "[](#f38ba8)"
-vicmd_symbol = "[](#f9e2af)"
+success_symbol = "[](#b1e3ad bold)"
+error_symbol = "[](#e38c8f)"
+vicmd_symbol = "[](#f9c096)"
 
 [directory]
-format = "[]($style)[ ](bg:#24263a fg:#ECD3A0)[$path](bg:#24263a fg:#BBC3DF bold)[ ]($style)"
-style = "bg:none fg:#24263a"
+format = "[]($style)[ ](bg:#332e41 fg:#ebddaa)[$path](bg:#332e41 fg:#dadae8 bold)[ ]($style)"
+style = "bg:none fg:#332e41"
 truncation_length = 3
 truncate_to_repo=false
 
 [git_branch]
-format = "[]($style)[[ ](bg:#24263a fg:#A2DD9D bold)$branch](bg:#24263a fg:#86AAEC)[ ]($style)"
-style = "bg:none fg:#24263a"
+format = "[]($style)[[ ](bg:#332e41 fg:#b1e3ad bold)$branch](bg:#332e41 fg:#a4b9ef)[ ]($style)"
+style = "bg:none fg:#332e41"
 
 [git_status]
 # $all status$ahead_behind
-format = "[]($style)[$all_status$ahead_behind](bg:#24263a fg:#b4befe)[ ]($style)"
-style = "bg:none fg:#24263a"
+format = "[]($style)[$all_status$ahead_behind](bg:#332e41 fg:#b4befe)[ ]($style)"
+style = "bg:none fg:#332e41"
 conflicted = "="
 ahead =	"⇡${count}"
 behind = "⇣${count}"
@@ -54,11 +54,3 @@ modified = "!${count}"
 staged = "+${count}"
 renamed = "»${count}"
 deleted = "${count}"
-
-[cmd_duration]
-min_time = 1
-# duration & style
-format = "[]($style)[[神](bg:#24263a fg:#eba0ac bold) $duration](bg:#24263a fg:#BBC3DF)[ ]($style)"
-disabled = false
-style = "bg:none fg:#24263a"
-

@@ -16,6 +16,7 @@ alias m='micro'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias mkdir='mkdir -p'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g='git'
@@ -25,3 +26,4 @@ alias rsync='rsync -haP --numeric-ids -e "ssh -o Compression=no"'
 alias sc='sudo systemctl'
 alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
 (( $+commands[codium] )) && alias code=codium
+(( $+commands[batman] )) && alias man=batman
