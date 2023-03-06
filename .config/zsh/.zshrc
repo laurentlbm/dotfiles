@@ -44,6 +44,9 @@ then
     zstyle ':fzf-tab:*' show-group none
 EOF
 
+  # History with UP & DOWN
+  zgenom load zsh-users/zsh-history-substring-search
+
   # Syntax highlighting
   zgenom load zsh-users/zsh-syntax-highlighting
 
@@ -56,11 +59,14 @@ EOF
   # Suggestions when command not found.
   zgenom load Freed-Wu/zsh-command-not-found
 
+  # fish-like abbr
+  zgenom load olets/zsh-abbr
+
   # Jump to directories more quickly.
   zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
 
   # Better search for shell history.
-  zgenom eval --name atuin <<(atuin init zsh)
+  zgenom eval --name atuin <<(atuin init zsh --disable-up-arrow)
 
   # Docker aliases
   zgenom load akarzim/zsh-docker-aliases
