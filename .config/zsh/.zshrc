@@ -42,6 +42,7 @@ then
   zgenom load Aloxaf/fzf-tab
   zgenom eval <<EOF
     zstyle ':fzf-tab:*' show-group none
+    zstyle ':completion:*' special-dirs false
 EOF
 
   # History with UP & DOWN
