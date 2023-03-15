@@ -1,6 +1,6 @@
-(( $+commands[paru] )) && autoload -Uz pacf
-(( $+commands[pkg] )) && autoload -Uz pkgf
-(( $+commands[rg] )) && autoload -Uz rgf
+(( $+commands[paru] ))  && autoload -Uz pacf
+(( $+commands[pkg] ))   && autoload -Uz pkgf
+(( $+commands[rg] ))    && autoload -Uz rgf
 
 (( $+commands[exa] )) && {
   alias ls='exa --all --git --icons --group-directories-first --time-style=long-iso --color-scale --classify'
