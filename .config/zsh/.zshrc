@@ -1,5 +1,5 @@
 # Always run in tmux
-[[ -z "$TMUX" ]] && {
+[[ -z "$TMUX" ]] && (( $+commands[tmux] )) && {
   tmux
   exit
 }
@@ -64,10 +64,10 @@ EOF
   zgenom load olets/zsh-abbr
 
   # Jump to directories more quickly.
-  zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
+  (( $+commands[zoxide] )) && zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
 
   # Better search for shell history.
-  zgenom eval --name atuin <<(atuin init zsh --disable-up-arrow)
+  (( $+commands[atuin] )) && zgenom eval --name atuin <<(atuin init zsh --disable-up-arrow)
 
   # Docker aliases
   zgenom load akarzim/zsh-docker-aliases
@@ -77,7 +77,7 @@ EOF
 
   # Prompt theme
   zgenom load $ZDOTDIR/theme
-  zgenom eval --name starship <<(starship init zsh)
+  (( $+commands[starship] )) && zgenom eval --name starship <<(starship init zsh)
 
   # Key bindings
   zgenom load $ZDOTDIR/bindings.zsh
@@ -89,4 +89,4 @@ EOF
 fi
 
 # Show system info at launch
-macchina
+(( $+commands[macchina] )) && macchina
