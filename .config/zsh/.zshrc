@@ -1,6 +1,10 @@
 # Always run in tmux
-[[ -z "$TMUX" ]] && (( $+commands[tmux] )) && {
-  tmux
+[[ -z "$NO_TMUX" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )) && {
+  if ! tmux ls 2>/dev/null | grep -q -E '^main.*attached'; then
+    tmux attach -t main || tmux new -s main
+  else
+    tmux
+  fi
   exit
 }
 
