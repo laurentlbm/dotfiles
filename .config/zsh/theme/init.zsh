@@ -1,9 +1,9 @@
 0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
-THEME_DIR="${0:A:h}"
+ZSH_THEME_DIR="${0:A:h}"
 
-source "$THEME_DIR/zsh-syntax-highlighting.zsh"
-source "$THEME_DIR/ls-colors.zsh"
+source "$ZSH_THEME_DIR/zsh-syntax-highlighting.zsh"
+source "$ZSH_THEME_DIR/ls-colors.zsh"
 
 # For micro
 export COLORTERM="truecolor"
