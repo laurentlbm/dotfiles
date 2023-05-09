@@ -16,7 +16,7 @@ visible = false
 [box]
 visible = true
 border = "rounded"
-title = "─  OnePlus 8 "
+title = "─  OnePlus 8 "
 
 [box.inner_margin]
 x = 1
@@ -41,11 +41,11 @@ distro = "Distro"
 terminal = "Terminal"
 shell = "Shell"
 packages = "Packages"
-uptime = ""
+uptime = "󱎫"
 memory = ""
 machine = "Machine"
-local_ip = "ﯱ"
-backlight = "Brightness"
+local_ip = "󰩠"
+backlight = "󰃠"
 resolution = "Resolution"
-cpu_load = ""
+cpu_load = "󰄧"
 cpu = "CPU"

@@ -25,8 +25,8 @@ symbol = ' '
 
 # Prompt symbols
 [character]
-success_symbol = "[](#b1e3ad bold)"
-error_symbol = "[](#e38c8f)"
+success_symbol = "[>](#b1e3ad bold)"
+error_symbol = "[𐄂](#e38c8f)"
 vicmd_symbol = "[](#f9c096)"
 
 [directory]
@@ -47,10 +47,10 @@ conflicted = "="
 ahead =	"⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-up_to_date = ""
+up_to_date = "[󰄬](bg:#332e41 fg:#b1e3ad)"
 untracked = "[?${count}](bg:#332e41 fg:#c6aae8) "
-stashed = " "
+stashed = "󰚇 "
 modified = "[!${count}](bg:#332e41 fg:#f9c096) "
 staged = "[+${count}](bg:#332e41 fg:#b1e3ad) "
 renamed = "[»${count}](bg:#332e41 fg:#ebddaa) "
-deleted = "[${count}](bg:#332e41 fg:#e38c8f) "
+deleted = "[×${count}](bg:#332e41 fg:#e38c8f) "
