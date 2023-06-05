@@ -26,7 +26,7 @@ symbol = ' '
 # Prompt symbols
 [character]
 success_symbol = "[>](#b1e3ad)"
-error_symbol = "[𐄂](#e38c8f bold)"
+error_symbol = "[×](#e38c8f bold)"
 vicmd_symbol = "[](#f9c096)"
 
 [directory]
