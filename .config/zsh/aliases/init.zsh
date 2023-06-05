@@ -27,3 +27,4 @@ alias sc='sudo systemctl'
 alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
 (( $+commands[codium] )) && alias code=codium
 (( $+commands[batman] )) && alias man=batman
+(( $+commands[pacdiff] && $+commands[meld] )) && alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
