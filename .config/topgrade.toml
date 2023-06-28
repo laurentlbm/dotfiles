@@ -4,6 +4,8 @@ assume_yes = true
 # Disable specific steps - same options as the command line flag
 disable = ["micro", "containers"]
 
+display_preamble = false
+
 # Run inside tmux
 run_in_tmux = false
 
@@ -11,7 +13,7 @@ run_in_tmux = false
 max_concurrency = 5
 # Additional git repositories to pull
 repos = [
-    "~/projects/*/"
+    "~/Projects/*/"
 ]
 # Arguments to pass Git when pulling Repositories
 arguments = "--recurse-submodules"
