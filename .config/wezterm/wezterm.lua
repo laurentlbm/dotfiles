@@ -1,48 +1,37 @@
-local wezterm = require 'wezterm';
+local wezterm = require("wezterm")
 
-return {
-  font = wezterm.font_with_fallback({
-      "DMMono Nerd Font Mono",
-      "JetBrainsMono Nerd Font Mono",
-      "Fira Code",
-    }),
-  font_size = 10.0,
-  line_height = 1.15,
-  default_cursor_style = "BlinkingBar",
-  color_scheme = "Catppuccin Mocha",
-  launch_menu = {
-    {
-      args = {"btop"},
-    },
-    {
-      label = "Bash",
-      args = {"bash", "-l"},
-    },
-    {
-      args = {"ssh", "spica"},
-    },
-    {
-      args = {"ssh", "vega"},
-    },
-    {
-      args = {"ssh", "delphi"},
-    },
-  },
-  keys = {
-    {key="l", mods="ALT", action="ShowLauncher"},
-    {key="w", mods="CTRL", action=wezterm.action{CloseCurrentTab={confirm=false}}},
-    {key="/", mods="CTRL", action="DisableDefaultAssignment"},
-    {key="/", mods="CMD", action="DisableDefaultAssignment"},
-  },
-  window_background_opacity = 0.8,
-  window_padding = {
-    left = "1cell",
-    right = "1cell",
-    top = "0.5cell",
-    bottom = "0.5cell",
-  },
-  hide_tab_bar_if_only_one_tab = true,
-  show_tab_index_in_tab_bar = false,
---  use_fancy_tab_bar = false,
---  tab_max_width = 26,
+local c = {}
+if wezterm.config_builder then
+  c = wezterm.config_builder()
+  c:set_strict_mode(true)
+end
+
+require("fonts").apply(c)
+-- require("keys").apply(c)
+require("theme").apply(c)
+
+-- disable tmux
+--c.set_environment_variables = {
+--  NO_TMUX = "1",
+--}
+-- etc.
+c.adjust_window_size_when_changing_font_size = false
+c.audible_bell = "Disabled"
+c.clean_exit_codes = { 130 }
+c.default_cursor_style = "BlinkingBar"
+c.launch_menu = {
+  { args = {"btop"} },
+  { label = "Bash", args = {"bash", "-l"} },
+  { args = {"ssh", "spica"} },
+  { args = {"ssh", "vega"} },
+  { args = {"ssh", "delphi"} },
 }
+c.command_palette_font_size = 14.0
+c.window_background_opacity = 0.85
+c.window_frame = {
+  font_size = 11.0,
+}
+
+-- require("bar").apply_to_config(c)
+
+return c
