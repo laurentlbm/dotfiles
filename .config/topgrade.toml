@@ -1,10 +1,9 @@
+[misc]
 # Don't ask for confirmations
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["micro", "containers"]
-
-display_preamble = false
+disable = ["micro", "containers", "dotnet", "vim"]
 
 # Run inside tmux
 run_in_tmux = false
