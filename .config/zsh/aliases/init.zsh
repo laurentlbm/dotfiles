@@ -24,6 +24,7 @@ alias lzg='lazygit'
 alias rsync='rsync -haP --numeric-ids -e "ssh -o Compression=no"'
 alias sc='sudo systemctl'
 alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
+alias ylzg='lzg -w ~ -g ~/.local/share/yadm/repo.git'
 (( $+commands[codium] )) && alias code=codium
 (( $+commands[batman] )) && alias man=batman
 (( $+commands[pacdiff] && $+commands[meld] )) && alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
