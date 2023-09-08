@@ -1,0 +1,15 @@
+blocks:
+  - git
+  - name
+  - size
+  - date
+  - permission
+  - user
+
+date: '+%F %T'
+
+sorting:
+  dir-grouping: first
+
+ignore-globs:
+  - .git

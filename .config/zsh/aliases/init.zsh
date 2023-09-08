@@ -2,10 +2,9 @@
 (( $+commands[pkg] ))   && autoload -Uz pkgf
 (( $+commands[rg] ))    && autoload -Uz rgf
 
-(( $+commands[exa] )) && {
-  alias ls='exa --all --git --icons --group-directories-first --time-style=long-iso --color-scale --classify'
-  alias ll='ls --long'
-  alias tree='ls --tree --ignore-glob=.git'
+(( $+commands[lsd] )) && {
+  alias ls='lsd'
+  alias tree='ls --tree'
 }
 
 # Define aliases.
