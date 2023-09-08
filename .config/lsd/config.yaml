@@ -1,10 +1,10 @@
 blocks:
+  - permission
+  - size
+  - user
+  - date
   - git
   - name
-  - size
-  - date
-  - permission
-  - user
 
 date: '+%F %T'
 
