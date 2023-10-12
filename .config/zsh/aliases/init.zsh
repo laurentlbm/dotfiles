@@ -20,8 +20,8 @@ alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g='git'
 alias lzg='lazygit'
-# disable ssh compression for improved rsync speeds
-alias rsync='rsync -haP --numeric-ids -e "ssh -o Compression=no"'
+# disable compression for improved rsync speeds
+alias rsync='rsync -s -avAXEWSHh --no-compress --info=progress2'
 alias sc='sudo systemctl'
 alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
 alias ylzg='lzg -w ~ -g ~/.local/share/yadm/repo.git'
