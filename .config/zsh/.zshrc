@@ -1,10 +1,6 @@
 # Always run in tmux
 [[ -z "$NO_TMUX" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )) && {
-  if ! tmux ls 2>/dev/null | grep -q -E '^main.*attached'; then
-    tmux attach -t main || tmux new -s main
-  else
-    tmux
-  fi
+  tmux new -A -s main
   exit
 }
 
@@ -16,7 +12,7 @@ fi
 source $ZGEN_SOURCE/zgenom.zsh
 
 # Update zgenom and plugins every 7 days
-zgenom autoupdate --background
+zgenom autoupdate
 
 if ! zgenom saved
 then

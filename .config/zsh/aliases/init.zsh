@@ -28,3 +28,5 @@ alias ylzg='lzg -w ~ -g ~/.local/share/yadm/repo.git'
 (( $+commands[codium] )) && alias code=codium
 (( $+commands[batman] )) && alias man=batman
 (( $+commands[pacdiff] && $+commands[meld] )) && alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
+
+alias sysyadm='sudo yadm --yadm-dir /etc/yadm --yadm-data /etc/yadm/data'

@@ -11,11 +11,11 @@ run_in_tmux = false
 [git]
 max_concurrency = 5
 # Additional git repositories to pull
-repos = [
+pull_only_repos = [
     "~/Projects/*/"
 ]
 # Arguments to pass Git when pulling Repositories
-arguments = "--recurse-submodules"
+pull_arguments = "--recurse-submodules"
 
 # Commands to run before anything
 [pre_commands]
