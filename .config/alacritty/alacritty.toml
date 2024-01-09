@@ -1,0 +1,17 @@
+import = ["/home/laurent/.config/alacritty/catppuccin-mocha.toml"]
+
+[cursor.style]
+blinking = "Always"
+shape = "Beam"
+
+[font.normal]
+family = "DMCode Nerd Font Mono"
+style = "Regular"
+
+[window]
+decorations = "None"
+opacity = 0.85
+
+[window.padding]
+x = 10
+y = 10
