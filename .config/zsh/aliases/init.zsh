@@ -7,6 +7,11 @@
   alias tree='ls --tree'
 }
 
+function mkd() { mkdir -p $@ && cd ${@:$#} }
+alias mkdir='mkdir -p'
+alias ..='cd ..'
+alias ....='cd ../..'
+
 # Define aliases.
 alias sudo='sudo ' # https://wiki.archlinux.org/title/Sudo#Passing_aliases
 alias m='micro'
@@ -15,7 +20,6 @@ alias m='micro'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias mkdir='mkdir -p'
 alias x='exit'
 alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
 alias g='git'

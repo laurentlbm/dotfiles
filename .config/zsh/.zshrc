@@ -60,9 +60,6 @@ EOF
   # Suggestions when command not found.
   zgenom load Freed-Wu/zsh-command-not-found
 
-  # fish-like abbr
-  zgenom load olets/zsh-abbr
-
   # Jump to directories more quickly.
   (( $+commands[zoxide] )) && zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
 
