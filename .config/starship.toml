@@ -37,7 +37,7 @@ truncate_to_repo = false
 
 [time]
 disabled = false
-format = "[]($style)[󰥔 ](bg:#332e41 fg:#dadae8)[$time](bg:#332e41 fg:#dadae8)[ ]($style)"
+format = "[]($style)[󰥔 ](bg:#332e41 fg:#dadae8)[$time](bg:#332e41 fg:#dadae8)[]($style)"
 style = "bg:none fg:#332e41"
 
 [git_branch]
