@@ -1,5 +1,6 @@
 (( $+commands[paru] ))  && autoload -Uz pacf
 (( $+commands[pkg] ))   && autoload -Uz pkgf
+(( $+commands[apt] ))   && autoload -Uz aptf
 (( $+commands[rg] ))    && autoload -Uz rgf
 
 (( $+commands[lsd] )) && {
