@@ -11,7 +11,7 @@ run_in_tmux = false
 [git]
 max_concurrency = 5
 # Additional git repositories to pull
-pull_only_repos = [
+repos = [
     "~/Projects/*/"
 ]
 # Arguments to pass Git when pulling Repositories
