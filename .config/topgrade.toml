@@ -15,7 +15,7 @@ repos = [
     "~/Projects/*/"
 ]
 # Arguments to pass Git when pulling Repositories
-pull_arguments = "--recurse-submodules"
+arguments = "--recurse-submodules"
 
 # Commands to run before anything
 [pre_commands]
