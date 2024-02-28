@@ -14,7 +14,7 @@ visible = false
 [box]
 visible = true
 border = "rounded"
-title = "─  Spica "
+title = "─  Spica "
 
 [box.inner_margin]
 x = 1
