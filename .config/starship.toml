@@ -4,9 +4,10 @@
 
 # Setups
 format="""$directory$git_branch $fill $git_status $time
- $character"""
+ ${custom.root}$character"""
 add_newline = true
-command_timeout = 2000
+command_timeout = 1000
+palette = 'catppuccin'
 
 # Other languages configurations:
 c.disabled = true
@@ -20,42 +21,58 @@ lua.disabled = true
 java.disabled = true
 golang.disabled = true
 
+[palettes.catppuccin]
+black = '#332e41'
+white = '#dadae8'
+yellow = '#ebddaa'
+green = '#b1e3ad'
+red = '#e38c8f'
+orange = '#f9c096'
+blue = '#a4b9ef'
+cyan = '#b4befe'
+purple = '#c6aae8'
+
 [fill]
 symbol = ' '
 
 # Prompt symbols
 [character]
-success_symbol = "[>](#b1e3ad)"
-error_symbol = "[×](#e38c8f bold)"
-vicmd_symbol = "[](#f9c096)"
+success_symbol = "[>](green)"
+error_symbol = "[×](red bold)"
+vicmd_symbol = "[](orange)"
 
 [directory]
-format = "[]($style)[ ](bg:#332e41 fg:#ebddaa)[$path](bg:#332e41 fg:#dadae8 bold)[ ]($style)"
-style = "bg:none fg:#332e41"
+format = "[](bg:none fg:black)[ ](bg:black fg:yellow)[$path](bg:black fg:white bold)[ ](bg:none fg:black)"
+style = "bg:black fg:white"
 truncation_length = 3
 truncate_to_repo = false
 
+[custom.root]
+when = """ [[ "${USER}" = "root" ]] """
+format = '[#](red bold) '
+
+
 [time]
 disabled = false
-format = "[]($style)[󰥔 ](bg:#332e41 fg:#dadae8)[$time](bg:#332e41 fg:#dadae8)[]($style)"
-style = "bg:none fg:#332e41"
+format = "[](bg:none fg:black)[󰥔 $time]($style)[](bg:none fg:black)"
+style = "bg:black fg:white"
 
 [git_branch]
-format = "[]($style)[[ ](bg:#332e41 fg:#b1e3ad bold)$branch](bg:#332e41 fg:#a4b9ef)[ ]($style)"
-style = "bg:none fg:#332e41"
+format = "[](bg:none fg:black)[[ ](bg:black fg:green bold)$branch](bg:black fg:blue)[ ](bg:none fg:black)"
+style = "bg:none fg:white"
 
 [git_status]
 # $all status$ahead_behind
-format = "[]($style)[$all_status$ahead_behind](bg:#332e41 fg:#b4befe)[ ]($style)"
-style = "bg:none fg:#332e41"
+format = "[](bg:none fg:black)[$all_status$ahead_behind](bg:black fg:cyan)[ ](bg:none fg:black)"
+style = "bg:none fg:white"
 conflicted = "="
 ahead =	"⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-up_to_date = "[󰄬](bg:#332e41 fg:#b1e3ad)"
-untracked = "[?${count}](bg:#332e41 fg:#c6aae8) "
+up_to_date = "[󰄬](bg:black fg:green)"
+untracked = "[?${count}](bg:black fg:purple) "
 stashed = "󰚇 "
-modified = "[!${count}](bg:#332e41 fg:#f9c096) "
-staged = "[+${count}](bg:#332e41 fg:#b1e3ad) "
-renamed = "[»${count}](bg:#332e41 fg:#ebddaa) "
-deleted = "[×${count}](bg:#332e41 fg:#e38c8f) "
+modified = "[!${count}](bg:black fg:orange) "
+staged = "[+${count}](bg:black fg:green) "
+renamed = "[»${count}](bg:black fg:yellow) "
+deleted = "[×${count}](bg:black fg:red) "
