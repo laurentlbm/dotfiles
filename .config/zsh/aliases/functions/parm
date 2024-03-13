@@ -1,23 +1,20 @@
 #!/usr/bin/zsh
 
 __select_available() {
-  paru --sync --list --color always \
-    | awk '{print $2" "$1($4 == "" ? "" : " \033[1;33m*")}' \
+  paru --query --explicit --color always \
     | fzf \
       --multi \
       --ansi \
-      --nth 1 \
-      --preview 'paru --sync --info --info {2}/{1}' \
+      --with-nth 1 \
+      --preview 'paru --sync --info --info {1}' \
       --preview-window="$FZF_DEFAULT_PREVIEW_WINDOW_OPTS" \
-    | awk '{print $2"/"$1}'
+    | awk '{print $1}'
 }
 
-pacf() {
-  paru --sync --refresh
-
+parm() {
   local selection=$(__select_available)
   local args="$@"
-  [[ $# == 0 ]] && args='--sync'
+  [[ $# == 0 ]] && args='--remove'
 
   if [ -n "$selection" ]; then
     local packages=("${(@f)$(echo $selection)}")
@@ -28,4 +25,4 @@ pacf() {
   fi
 }
 
-pacf
+parm

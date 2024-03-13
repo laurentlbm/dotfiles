@@ -11,11 +11,11 @@ export MICRO_TRUECOLOR=1
 
 # Configure fzf preview differently on mobile
 if [ -n "$TMUX" ]; then
-  local columns=$(tmux display-message -p "#{window_width}")
+  columns=$(tmux display-message -p "#{window_width}")
 else
-  local columns=$(tput cols)
+  columns=$(tput cols)
 fi
-if [ $columns -lt 100 ]; then
+if (( columns < 100 )); then
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="down:70%:wrap"
 else
   export FZF_DEFAULT_PREVIEW_WINDOW_OPTS="right:70%:wrap"

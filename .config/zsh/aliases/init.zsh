@@ -1,4 +1,4 @@
-(( $+commands[paru] ))  && autoload -Uz pacf
+(( $+commands[paru] ))  && autoload -Uz pacf parm
 (( $+commands[pkg] ))   && autoload -Uz pkgf
 (( $+commands[apt] ))   && autoload -Uz aptf
 (( $+commands[rg] ))    && autoload -Uz rgf

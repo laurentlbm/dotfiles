@@ -5,7 +5,7 @@ blinking = "Always"
 shape = "Beam"
 
 [font.normal]
-family = "DMCode Nerd Font Mono"
+family = "Maple Mono NF"
 style = "Regular"
 
 [window]
