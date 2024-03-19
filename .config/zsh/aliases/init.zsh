@@ -28,7 +28,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias x='exit'
-alias yt='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"'
+alias yt='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b" --merge-output-format mkv --embed-subs'
 alias g='git'
 alias lzg='lazygit'
 # disable compression for improved rsync speeds

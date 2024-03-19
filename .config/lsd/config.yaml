@@ -2,6 +2,7 @@ blocks:
   - permission
   - size
   - user
+  - group
   - date
   - git
   - name

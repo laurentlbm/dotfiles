@@ -57,3 +57,8 @@ export VISUAL=micro
 #   -x4  tabs are 4 instead of 8
 export LESS='-iRFXMx4'
 export PAGER=less
+
+# hack for xclip: when is ssh, we use the display of vnc
+if [ -n "$SSH_CONNECTION" ] && [ -z "$DISPLAY" ]; then
+  export DISPLAY=":1"
+fi
