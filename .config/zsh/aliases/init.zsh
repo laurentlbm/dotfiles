@@ -1,3 +1,9 @@
+0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
+ZSH_THEME_DIR="${0:A:h}"
+
+source "$ZSH_THEME_DIR/docker.zsh"
+
 (( $+commands[paru] ))  && autoload -Uz pacf parm
 (( $+commands[pkg] ))   && autoload -Uz pkgf
 (( $+commands[apt] ))   && autoload -Uz aptf

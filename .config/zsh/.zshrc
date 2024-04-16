@@ -22,28 +22,18 @@ then
   zgenom load jandamm/zgenom-ext-eval
 
   # Shell config I didn't know where else to put...
-  zgenom load $ZDOTDIR/stuff.zsh
-
-  # Configure built-in history management.
-  zgenom load mattmc3/zephyr plugins/history
+  zgenom load $ZDOTDIR/base.zsh
 
   # Load ohmyzsh plugins
   zgenom ohmyzsh
   zgenom ohmyzsh plugins/git  # git aliases
   zgenom ohmyzsh plugins/sudo # prefix command with sudo with <ESC><ESC>
 
-  # Configure built-in completion system.
-  zgenom load z-shell/zsh-fancy-completions
-
   # Add tons of completion definitions.
   zgenom load clarketm/zsh-completions
 
   # Use fzf for tab completions.
   zgenom load Aloxaf/fzf-tab
-  zgenom eval <<EOF
-    zstyle ':fzf-tab:*' show-group none
-    zstyle ':completion:*' special-dirs false
-EOF
 
   # History with UP & DOWN
   zgenom load zsh-users/zsh-history-substring-search
@@ -66,9 +56,6 @@ EOF
   # Better search for shell history.
   (( $+commands[atuin] )) && zgenom eval --name atuin <<(atuin init zsh --disable-up-arrow)
 
-  # Docker aliases
-  zgenom load akarzim/zsh-docker-aliases
-
   # Custom aliases
   zgenom load $ZDOTDIR/aliases
 
@@ -78,6 +65,9 @@ EOF
 
   # Key bindings
   zgenom load $ZDOTDIR/bindings.zsh
+
+  # Configure built-in completion system.
+  zgenom load $ZDOTDIR/completion.zsh
 
   # Compile everything
   zgenom compile $ZDOTDIR
