@@ -29,8 +29,13 @@
 [mergetool]
   keepBackup = false
 [diff]
-  tool = bc
+  tool = difftastic
+  external = difft
   colorMoved = default
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [alias]
   st = status
   co = checkout
@@ -44,14 +49,4 @@
   nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
   sync = "!curbranch=$(git rev-parse --abbrev-ref HEAD); for branch in $(git for-each-ref refs/heads --format='%(refname:short)') ; do if [ $branch = $curbranch ]; then git merge --ff-only origin/${branch}; else git fetch origin ${branch}:${branch}; fi; done;"
 [pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
-[include]
-  path = ~/.config/delta/themes.gitconfig
-[delta]
-  features = chameleon
-  syntax-theme = Catppuccin-mocha
-[interactive]
-  diffFilter = delta --color-only
+  difftool = true
