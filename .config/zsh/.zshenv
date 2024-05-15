@@ -9,5 +9,6 @@
 
 fpath=(
   "${XDG_DATA_HOME}/zsh/functions"
+  "${HOMEBREW_PREFIX}/share/zsh/site-functions"
   $fpath
 )
