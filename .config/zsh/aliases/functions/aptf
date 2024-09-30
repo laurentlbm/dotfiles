@@ -25,7 +25,7 @@ function aptf() {
     )
 
   if [ -n "$selection" ]; then
-    cmd="sudo nala install ${selection}"
+    cmd="sudo apt install ${selection}"
      # echo "$cmd"
     print -s "$cmd"
     eval "$cmd"
