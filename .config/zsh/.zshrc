@@ -26,17 +26,22 @@ then
 
   # Load ohmyzsh plugins
   zgenom ohmyzsh
-  zgenom ohmyzsh plugins/git  # git aliases
-  zgenom ohmyzsh plugins/sudo # prefix command with sudo with <ESC><ESC>
+  # git aliases
+  zgenom ohmyzsh plugins/git
+  # prefix command with sudo with <ESC><ESC>
+  zgenom ohmyzsh plugins/sudo
+  # direnv integration
+  zgenom ohmyzsh plugins/direnv
+  # Use the command-not-found package for zsh to provide suggested packages to be installed if a command cannot be found
+  zgenom ohmyzsh plugins/command-not-found
+  # History with UP & DOWN
+  zgenom ohmyzsh plugins/history-substring-search
 
   # Add tons of completion definitions.
   zgenom load clarketm/zsh-completions
 
   # Use fzf for tab completions.
   zgenom load Aloxaf/fzf-tab
-
-  # History with UP & DOWN
-  zgenom load zsh-users/zsh-history-substring-search
 
   # Syntax highlighting
   zgenom load zsh-users/zsh-syntax-highlighting
@@ -46,9 +51,6 @@ then
 
   # Auto-close and delete matching delimiters.
   zgenom load hlissner/zsh-autopair
-
-  # Suggestions when command not found.
-  zgenom load Freed-Wu/zsh-command-not-found
 
   # Jump to directories more quickly.
   (( $+commands[zoxide] )) && zgenom eval --name zoxide <<(zoxide init zsh --cmd cd)
