@@ -78,4 +78,4 @@ then
 fi
 
 # Show system info at launch
-(( $+commands[macchina] )) && macchina
+(( $+commands[fastfetch] )) && fastfetch

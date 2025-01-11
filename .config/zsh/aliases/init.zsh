@@ -31,8 +31,6 @@ alias x='exit'
 alias yt='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b" --merge-output-format mkv --embed-subs'
 alias g='git'
 alias lzg='lazygit'
-# disable compression for improved rsync speeds
-alias rsync='rsync -s -avAXEWSHh --no-compress --info=progress2'
 alias sc='sudo systemctl'
 alias ypull='yadm pull; yadm submodule update --init --recursive --force --remote'
 alias ylzg='lzg -w ~ -g ~/.local/share/yadm/repo.git'
@@ -41,3 +39,11 @@ alias ylzg='lzg -w ~ -g ~/.local/share/yadm/repo.git'
 (( $+commands[pacdiff] && $+commands[meld] )) && alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
 
 alias sysyadm='sudo yadm --yadm-dir /etc/yadm --yadm-data /etc/yadm/data'
+
+# disable compression for improved rsync speeds
+alias rsync='rsync -s -avWSHh --no-compress --info=progress2'
+if [[ -z "$TERMUX_VERSION" ]]; then
+  # Termux doesn't support UNIX permissions, but other systems should
+  # preserve those attributes when rsync'ing files
+  alias rsync='rsync -AXE -s -avWSHh --no-compress --info=progress2'
+fi
