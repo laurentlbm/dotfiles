@@ -31,7 +31,7 @@ then
   # prefix command with sudo with <ESC><ESC>
   zgenom ohmyzsh plugins/sudo
   # direnv integration
-  zgenom ohmyzsh plugins/direnv
+  (( $+commands[direnv] )) && zgenom ohmyzsh plugins/direnv
   # Use the command-not-found package for zsh to provide suggested packages to be installed if a command cannot be found
   zgenom ohmyzsh plugins/command-not-found
   # History with UP & DOWN
