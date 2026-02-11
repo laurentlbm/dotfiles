@@ -5,3 +5,6 @@ search_mode = "fulltext"
 filter_mode = "host"
 show_preview = true
 enter_accept = true
+
+[daemon]
+enabled = true

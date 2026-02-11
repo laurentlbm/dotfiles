@@ -25,7 +25,7 @@
             "type": "os",
             "key": "  ",
             "keyColor": "red",
-            "format": "{name} {version} ({codename})"
+            "format": "{name} {version}"
         },
         {
             "type": "kernel",
