@@ -13,6 +13,10 @@ source "$ZSH_THEME_DIR/docker.zsh"
   alias ls='lsd'
   alias tree='ls --tree'
 }
+(( $+commands[eza] )) && {
+  alias ls='eza --icons --time-style=long-iso --group-directories-first --smart-group'
+  alias tree='ls --tree'
+}
 
 function mkd() { mkdir -p $@ && cd ${@:$#} }
 alias mkdir='mkdir -p'
@@ -26,7 +30,6 @@ alias m='micro'
 (( $+commands[lvim] )) && alias vi='lvim'
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -i'
 alias x='exit'
 alias yt='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b" --merge-output-format mkv --embed-subs'
 alias g='git'
@@ -47,3 +50,18 @@ if [[ -z "$TERMUX_VERSION" ]]; then
   # preserve those attributes when rsync'ing files
   alias rsync='rsync -AXE -s -avWSHh --no-compress --info=progress2'
 fi
+
+function rm() {
+  if [ $+commands[eza] ]; then
+    eza -l --no-user --no-permissions --no-time --icons "$@"
+  else
+    ls -FCsd -- "$@"
+  fi
+
+  read "reply?Remove [ny]? "
+  if [[ "$reply" =~ ^[Yy]$ ]]; then
+    /bin/rm -rf -- "$@"
+  else
+    echo '(cancelled)'
+  fi
+}
