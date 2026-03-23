@@ -30,6 +30,7 @@ alias m='micro'
 (( $+commands[lvim] )) && alias vi='lvim'
 alias cp='cp -i'
 alias mv='mv -i'
+alias rm='rm -i'
 alias x='exit'
 alias yt='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b" --merge-output-format mkv --embed-subs'
 alias g='git'
@@ -51,16 +52,17 @@ if [[ -z "$TERMUX_VERSION" ]]; then
   alias rsync='rsync -AXE -s -avWSHh --no-compress --info=progress2'
 fi
 
-function rm() {
+# Safer rm
+function rm_() {
   if [ $+commands[eza] ]; then
-    eza -l --no-user --no-permissions --no-time --icons "$@"
+    eza -l --no-user --no-permissions --no-time --icons --group-directories-first "$@"
   else
     ls -FCsd -- "$@"
   fi
 
-  read "reply?Remove [ny]? "
+  read "reply?Remove? [y/N] "
   if [[ "$reply" =~ ^[Yy]$ ]]; then
-    /bin/rm -rf -- "$@"
+    command rm -rf -- "$@"
   else
     echo '(cancelled)'
   fi
