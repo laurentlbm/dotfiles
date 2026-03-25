@@ -7,4 +7,4 @@ show_preview = true
 enter_accept = true
 
 [daemon]
-enabled = true
+enabled = false
